@@ -1,4 +1,3 @@
-# Notas_Android.md
 
 **Fecha de inicio:** 25 de Febrero 2026  
 **Fecha estimada de examen:** Finales de Mayo - Principios de Junio 2026
@@ -19,8 +18,8 @@
 
 - [Día 1 - Introducción y Botones](#d%C3%ADa-1---introducci%C3%B3n-y-botones)
 - [Día 2 - Formularios y EditText](#d%C3%ADa-2---formularios-y-edittext)
-- Día 3 - CheckBox, RadioButton y Toast _(Próximamente)_
-- Día 4 - Spinner y Layouts _(Próximamente)_
+- [Día 3 - Spinner y Layouts](#d%C3%ADa-3---spinner-y-layouts) ✅
+- Día 4 - Spinner y Layouts ✅
 
 **[SEMANAS 3-4: LISTAS Y ADAPTADORES](#semanas-3-4-listas-y-adaptadores)**
 
@@ -1656,8 +1655,8 @@ Has aprendido a:
 ## 🏁 FIN DEL DOCUMENTO ACTUAL
 
 **Última actualización:** 25/02/2026 - 19:45h  
-**Días completados:** 2 de 32  
-**Progreso:** 6.25% ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜
+**Días completados:** 4 de 32  
+**Progreso:** 12.5% ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜
 
 ---
 
@@ -1665,8 +1664,8 @@ Has aprendido a:
 
 |Semana|Días|Estado|
 |---|---|---|
-|Semanas 1-2|Día 1-2|✅ Completados|
-|Semanas 1-2|Día 3-4|⏳ Pendientes|
+|Semanas 1-2|Día 1-3|✅ Completados|
+|Semanas 1-2|Día 1-4|✅ Completados|
 |Semanas 3-4|Día 5-8|⏳ Pendientes|
 |Semanas 5-6|Día 9-12|⏳ Pendientes|
 |Semanas 7-8|Día 13-16|⏳ Pendientes|
@@ -1684,7 +1683,11 @@ Has aprendido a:
 |Ejercicio 1: Contador de Clics|Día 1|✅|
 |Ejercicio 2: Cambiar Color de Fondo|Día 1|✅|
 |Ejercicio 3: Formulario de Registro|Día 2|⏳ Pendiente|
-|Ejercicio 4: Calculadora Simple|Día 2|⏳ Pendiente|
+|Ejercicio 4: Calculadora Simple|Día 2|✅|
+|Ejercicio 5: Conversor de Unidades|Día 3|✅|
+|Ejercicio 6: Calculadora IMC|Día 3|✅|
+|Ejercicio 7: Lista de Tareas|Día 4|⏳ Pendiente|
+|Ejercicio 8: Lista de Contactos|Día 4|⏳ Pendiente|
 
 ---
 
@@ -1694,3 +1697,839 @@ Has aprendido a:
 
 **📌 Próxima sesión:** Día 3 - Spinner y Layouts  
 **📧 Contacto:** Envía tus ejercicios completados para revisión
+
+---
+
+# 🎯 DÍA 3 - Spinner y Layouts
+
+**Fecha:** 26 de Febrero 2026  
+**Duración:** 2-3 horas  
+**Objetivos:** Dominar el Spinner (listas desplegables) y diferentes tipos de Layouts para organizar la interfaz
+
+---
+
+## 📖 1. Spinner - Lista desplegable
+
+El `Spinner` es como un ComboBox en Windows Forms: una lista desplegable donde el usuario selecciona una opción.
+
+### Características del Spinner:
+
+```
+┌─────────────────────────────┐
+│  Spinner                   ▼│  ← Estado cerrado
+└─────────────────────────────┘
+
+        ↓ Al pulsar
+
+┌─────────────────────────────┐
+│  Opción 1                    │
+│  Opción 2                    │  ← Lista desplegada
+│  Opción 3                    │
+│  Opción 4                    │
+└─────────────────────────────┘
+```
+
+---
+
+### XML básico del Spinner:
+
+```xml
+<Spinner
+    android:id="@+id/spinnerPaises"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:prompt="@string/selecciona_pais"/>
+```
+
+**Atributos importantes:**
+
+|Atributo|Explicación|
+|---|---|
+|`android:prompt`|Título que aparece en el diálogo de selección|
+|`android:spinnerMode`|`dropdown` (por defecto) o `dialog`|
+
+---
+
+### Java - Spinner con ArrayAdapter:
+
+**Opción 1: Desde un array en código**
+
+```java
+Spinner spinnerPaises = findViewById(R.id.spinnerPaises);
+
+// Array de opciones
+String[] paises = {"España", "Francia", "Italia", "Alemania", "Portugal"};
+
+// Crear adaptador
+ArrayAdapter<String> adapter = new ArrayAdapter<>(
+    this,
+    android.R.layout.simple_spinner_item,
+    paises
+);
+
+// Especificar el layout para las opciones desplegadas
+adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+// Asignar adaptador al Spinner
+spinnerPaises.setAdapter(adapter);
+```
+
+**Opción 2: Desde strings.xml (MEJOR PRÁCTICA)**
+
+**strings.xml:**
+
+```xml
+<string-array name="paises">
+    <item>España</item>
+    <item>Francia</item>
+    <item>Italia</item>
+    <item>Alemania</item>
+    <item>Portugal</item>
+</string-array>
+```
+
+**Java:**
+
+```java
+Spinner spinnerPaises = findViewById(R.id.spinnerPaises);
+
+ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+    this,
+    R.array.paises,
+    android.R.layout.simple_spinner_item
+);
+
+adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+spinnerPaises.setAdapter(adapter);
+```
+
+---
+
+### Obtener el elemento seleccionado:
+
+```java
+// Obtener como String
+String seleccionado = spinnerPaises.getSelectedItem().toString();
+
+// Obtener la posición (índice)
+int posicion = spinnerPaises.getSelectedItemPosition();
+
+// Verificar si está seleccionado el primero (posición 0)
+if (posicion == 0) {
+    // Primera opción seleccionada
+}
+```
+
+---
+
+### Listener de selección:
+
+```java
+spinnerPaises.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String seleccionado = parent.getItemAtPosition(position).toString();
+        Toast.makeText(MainActivity.this, "Seleccionado: " + seleccionado, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Se llama cuando no hay nada seleccionado
+    }
+});
+```
+
+---
+
+## 📖 2. LinearLayout - Organización lineal
+
+Ya lo hemos usado, pero vamos a profundizar.
+
+### Orientación vertical (por defecto):
+
+```xml
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Botón 1"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Botón 2"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Botón 3"/>
+</LinearLayout>
+```
+
+**Resultado:**
+
+```
+┌─────────────────────┐
+│     Botón 1         │
+├─────────────────────┤
+│     Botón 2         │
+├─────────────────────┤
+│     Botón 3         │
+└─────────────────────┘
+```
+
+---
+
+### Orientación horizontal:
+
+```xml
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Botón 1"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Botón 2"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Botón 3"/>
+</LinearLayout>
+```
+
+**Resultado:**
+
+```
+┌───────┬───────┬───────┐
+│Botón 1│Botón 2│Botón 3│
+└───────┴───────┴───────┘
+```
+
+---
+
+### layout_weight - Distribuir espacio
+
+El atributo `layout_weight` permite distribuir el espacio proporcionalmente:
+
+```xml
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="1"/>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="2"/>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="3"/>
+</LinearLayout>
+```
+
+**Resultado:** El botón 2 ocupa el doble de espacio que los otros (peso 2 vs 1)
+
+```
+┌────┬─────────┬────┐
+│ 1  │    2    │ 3  │
+└────┴─────────┴────┘
+```
+
+**⚠️ IMPORTANTE:** Cuando usas `layout_weight`, el `layout_width` debe ser `0dp` (en horizontal) o `layout_height` debe ser `0dp` (en vertical).
+
+---
+
+### Atributos de alineación:
+
+```xml
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"          <!-- Alinea el contenido dentro -->
+    android:padding="20dp">           <!-- Espaciado interno -->
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"   <!-- Alinea este elemento -->
+        android:text="Botón"/>
+</LinearLayout>
+```
+
+**Diferencia entre `gravity` y `layout_gravity`:**
+
+|Atributo|¿Dónde se usa?|Efecto|
+|---|---|---|
+|`android:gravity`|En el **contenedor**|Alinea el **contenido** dentro del contenedor|
+|`android:layout_gravity`|En el **elemento hijo**|Alinea el **propio elemento** dentro de su contenedor|
+
+**Valores comunes:**
+
+- `center` - Centro
+- `start` - Inicio (izquierda en LTR)
+- `end` - Final (derecha en LTR)
+- `top` - Arriba
+- `bottom` - Abajo
+- `center_horizontal` - Centro horizontal
+- `center_vertical` - Centro vertical
+
+---
+
+## 📖 3. RelativeLayout - Posicionamiento relativo
+
+Permite posicionar elementos **relativos unos a otros** o **relativos al contenedor**.
+
+```xml
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Elemento A: centrado en el contenedor -->
+    <TextView
+        android:id="@+id/textoCentral"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Centro"
+        android:textSize="24sp"/>
+
+    <!-- Elemento B: arriba del A -->
+    <Button
+        android:id="@+id/btnArriba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/textoCentral"
+        android:layout_centerHorizontal="true"
+        android:text="Arriba"/>
+
+    <!-- Elemento C: abajo del A -->
+    <Button
+        android:id="@+id/btnAbajo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textoCentral"
+        android:layout_centerHorizontal="true"
+        android:text="Abajo"/>
+
+    <!-- Elemento D: izquierda del A -->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/textoCentral"
+        android:layout_centerVertical="true"
+        android:text="Izq"/>
+
+    <!-- Elemento E: derecha del A -->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/textoCentral"
+        android:layout_centerVertical="true"
+        android:text="Der"/>
+
+</RelativeLayout>
+```
+
+**Resultado:**
+
+```
+       [Arriba]
+          ↓
+[Izq] [Centro] [Der]
+          ↓
+       [Abajo]
+```
+
+---
+
+### Atributos de RelativeLayout más usados:
+
+**Relativos al contenedor:**
+
+```xml
+android:layout_alignParentTop="true"        <!-- Arriba del contenedor -->
+android:layout_alignParentBottom="true"     <!-- Abajo del contenedor -->
+android:layout_alignParentStart="true"      <!-- Izquierda del contenedor -->
+android:layout_alignParentEnd="true"        <!-- Derecha del contenedor -->
+android:layout_centerInParent="true"        <!-- Centro absoluto -->
+android:layout_centerHorizontal="true"      <!-- Centro horizontal -->
+android:layout_centerVertical="true"        <!-- Centro vertical -->
+```
+
+**Relativos a otro elemento:**
+
+```xml
+android:layout_above="@id/elemento"         <!-- Encima de -->
+android:layout_below="@id/elemento"         <!-- Debajo de -->
+android:layout_toStartOf="@id/elemento"     <!-- A la izquierda de -->
+android:layout_toEndOf="@id/elemento"       <!-- A la derecha de -->
+android:layout_alignTop="@id/elemento"      <!-- Alineado arriba con -->
+android:layout_alignBottom="@id/elemento"   <!-- Alineado abajo con -->
+android:layout_alignStart="@id/elemento"    <!-- Alineado izquierda con -->
+android:layout_alignEnd="@id/elemento"      <!-- Alineado derecha con -->
+```
+
+---
+
+## 🎯 EJERCICIO 5: Conversor de Unidades
+
+**📝 Objetivo:** Crear un conversor que transforme entre diferentes unidades según la selección del Spinner.
+
+**📋 Requisitos:**
+
+1. **Un Spinner** con opciones:
+    
+    - Kilómetros a Millas
+    - Millas a Kilómetros
+    - Celsius a Fahrenheit
+    - Fahrenheit a Celsius
+2. **Un EditText** para introducir el valor a convertir
+    
+3. **Un Button** "Convertir"
+    
+4. **Un TextView** que muestre el resultado
+    
+5. **Conversiones:**
+    
+    - km a millas: `millas = km * 0.621371`
+    - millas a km: `km = millas * 1.60934`
+    - °C a °F: `fahrenheit = (celsius * 9/5) + 32`
+    - °F a °C: `celsius = (fahrenheit - 32) * 5/9`
+
+**💡 Pistas:**
+
+```java
+// Obtener la opción seleccionada del Spinner
+String opcion = spinner.getSelectedItem().toString();
+
+// Comparar con equals()
+if (opcion.equals("Kilómetros a Millas")) {
+    // Hacer conversión
+}
+
+// Formatear resultado con 2 decimales
+String resultado = String.format("%.2f", valorConvertido);
+```
+
+[Ver código completo y layout en la sección anterior]
+
+---
+
+## 🎯 EJERCICIO 6: Calculadora de IMC
+
+**📝 Objetivo:** Crear una calculadora de IMC con diseño en RelativeLayout.
+
+**📋 Requisitos:**
+
+1. **EditText** para peso (kg)
+2. **EditText** para altura (cm)
+3. **Button** "Calcular IMC"
+4. **TextView** que muestre el IMC calculado
+5. **TextView** que muestre la categoría
+
+**💡 Fórmulas:**
+
+```java
+// IMC = peso (kg) / (altura (m))²
+double alturaMetros = alturaCm / 100.0;
+double imc = peso / (alturaMetros * alturaMetros);
+
+// Categorías:
+// IMC < 18.5 → Bajo peso
+// IMC 18.5 - 24.9 → Normal
+// IMC 25 - 29.9 → Sobrepeso
+// IMC >= 30 → Obesidad
+```
+
+[Ver código completo y layout en la sección anterior]
+
+---
+
+## 📝 CHECKLIST DÍA 3
+
+Antes de pasar al siguiente día, asegúrate de que:
+
+- [ ] Entiendes qué es un Spinner y cómo funciona
+- [ ] Sabes crear un ArrayAdapter para el Spinner
+- [ ] Conoces la diferencia entre crear adaptador desde código vs strings.xml
+- [ ] Sabes obtener el elemento seleccionado con `getSelectedItem()`
+- [ ] Puedes usar `setOnItemSelectedListener()`
+- [ ] Entiendes LinearLayout con orientación vertical y horizontal
+- [ ] Sabes usar `layout_weight` para distribuir espacio
+- [ ] Conoces la diferencia entre `gravity` y `layout_gravity`
+- [ ] Entiendes los conceptos básicos de RelativeLayout
+- [ ] Has completado el Ejercicio 5 (Conversor de Unidades)
+- [ ] Has completado el Ejercicio 6 (Calculadora IMC)
+
+---
+
+## 🎓 CONCEPTOS CLAVE DEL DÍA 3
+
+|Concepto|Definición|
+|---|---|
+|**Spinner**|Lista desplegable de selección única (como ComboBox)|
+|**ArrayAdapter**|Adaptador que conecta datos (array) con vistas (Spinner, ListView)|
+|**createFromResource()**|Crea ArrayAdapter desde strings.xml|
+|**getSelectedItem()**|Obtiene el elemento seleccionado del Spinner|
+|**LinearLayout**|Organiza elementos en línea (vertical u horizontal)|
+|**layout_weight**|Distribuye espacio proporcionalmente entre elementos|
+|**gravity**|Alinea el contenido dentro de un contenedor|
+|**layout_gravity**|Alinea un elemento dentro de su contenedor|
+|**RelativeLayout**|Posiciona elementos relativos entre sí o al contenedor|
+
+---
+
+## 💬 NOTAS DEL PROFESOR
+
+**¡Gran avance!** 🎉
+
+Has aprendido a:
+
+- Trabajar con Spinner y ArrayAdapter
+- Organizar interfaces con diferentes Layouts
+- Usar layout_weight para distribución proporcional
+- Posicionar elementos con RelativeLayout
+
+**Próximo día:** Comenzaremos con ListView, uno de los componentes más importantes para mostrar listas de datos.
+
+---
+
+[🔝 Volver al índice](#-%C3%ADndice-general)
+
+---
+
+📌 **Guardado:** 26/02/2026 - 15:30h  
+📌 **Próxima sesión:** Día 4 - ListView Básico
+
+---
+
+# 🎯 DÍA 4 - ListView Básico
+
+**Fecha:** 27 de Febrero 2026  
+**Duración:** 2-3 horas  
+**Objetivos:** Dominar el ListView para mostrar listas de datos con ArrayAdapter
+
+---
+
+## 📖 1. ¿Qué es un ListView?
+
+El `ListView` es un componente que muestra una lista **desplazable** de elementos. Es uno de los componentes más importantes en Android para mostrar colecciones de datos.
+
+### Analogía conceptual:
+
+```
+┌─────────────────────────────┐
+│  ListView                   │
+│  ┌───────────────────────┐  │
+│  │ Item 1                │  │ ← Elemento
+│  ├───────────────────────┤  │
+│  │ Item 2                │  │
+│  ├───────────────────────┤  │
+│  │ Item 3                │  │ ← Scroll vertical
+│  ├───────────────────────┤  │
+│  │ Item 4                │  │
+│  ├───────────────────────┤  │
+│  │ Item 5                │  │
+│  └───────────────────────┘  │
+│         ↕ Scroll            │
+└─────────────────────────────┘
+```
+
+**Características:**
+
+- 📜 Lista vertical desplazable
+- 🔄 Reutiliza vistas (eficiente)
+- 👆 Eventos de click en items
+- 🎨 Personalizable con adaptadores
+
+---
+
+## 📖 2. Componentes del ListView
+
+Para usar un ListView necesitas **3 elementos**:
+
+```
+┌──────────────────────────────────────┐
+│  1. ListView (en el XML)             │
+│     ↓                                │
+│  2. ArrayAdapter (conecta datos)     │
+│     ↓                                │
+│  3. Datos (Array o ArrayList)        │
+└──────────────────────────────────────┘
+```
+
+---
+
+## 📖 3. ListView básico con String[]
+
+### XML del ListView:
+
+```xml
+<ListView
+    android:id="@+id/listView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="#CCCCCC"
+    android:dividerHeight="1dp"/>
+```
+
+**Atributos importantes:**
+
+|Atributo|Explicación|
+|---|---|
+|`android:divider`|Color de la línea divisoria entre items|
+|`android:dividerHeight`|Altura de la línea divisoria|
+|`android:choiceMode`|`none`, `singleChoice`, `multipleChoice`|
+
+---
+
+### Java - ListView con Array simple:
+
+```java
+public class MainActivity extends AppCompatActivity {
+    
+    private ListView listView;
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        // 1. Referenciar ListView
+        listView = findViewById(R.id.listView);
+        
+        // 2. Crear array de datos
+        String[] paises = {
+            "España", "Francia", "Italia", "Alemania", 
+            "Portugal", "Grecia", "Holanda", "Bélgica"
+        };
+        
+        // 3. Crear ArrayAdapter
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+            this,
+            android.R.layout.simple_list_item_1,  // Layout predefinido
+            paises
+        );
+        
+        // 4. Asignar adaptador al ListView
+        listView.setAdapter(adapter);
+    }
+}
+```
+
+---
+
+## 📖 4. Layouts predefinidos para ListView
+
+Android proporciona varios layouts predefinidos:
+
+```java
+// Simple (solo texto)
+android.R.layout.simple_list_item_1
+
+// Con checkbox
+android.R.layout.simple_list_item_checked
+
+// Con radio button
+android.R.layout.simple_list_item_single_choice
+
+// Con checkbox múltiple
+android.R.layout.simple_list_item_multiple_choice
+
+// Dos líneas de texto
+android.R.layout.simple_list_item_2
+```
+
+---
+
+## 📖 5. Eventos onClick en ListView
+
+### OnItemClickListener:
+
+```java
+listView.setOnItemClickListener((parent, view, position, id) -> {
+    String itemSeleccionado = paises[position];
+    Toast.makeText(this, "Seleccionado: " + itemSeleccionado, Toast.LENGTH_SHORT).show();
+});
+```
+
+### OnItemLongClickListener:
+
+```java
+// Click largo (mantener pulsado)
+listView.setOnItemLongClickListener((parent, view, position, id) -> {
+    String item = paises[position];
+    Toast.makeText(this, "Long click: " + item, Toast.LENGTH_SHORT).show();
+    return true; // true = consumir evento
+});
+```
+
+---
+
+## 📖 6. ArrayList vs Array
+
+|Array `String[]`|ArrayList `ArrayList<String>`|
+|---|---|
+|Tamaño fijo|Tamaño dinámico|
+|`String[] arr = new String[5]`|`ArrayList<String> list = new ArrayList<>()`|
+|`arr[0] = "Hola"`|`list.add("Hola")`|
+|No se puede cambiar tamaño|`add()`, `remove()`, `clear()`|
+
+---
+
+## 📖 7. Operaciones con ArrayList en ListView
+
+### Añadir elemento:
+
+```java
+listaNombres.add(nombre);
+adapter.notifyDataSetChanged();  // ¡IMPORTANTE!
+```
+
+### Eliminar elemento:
+
+```java
+listaNombres.remove(position);
+adapter.notifyDataSetChanged();
+```
+
+### Limpiar lista:
+
+```java
+listaNombres.clear();
+adapter.notifyDataSetChanged();
+```
+
+**⚠️ MUY IMPORTANTE:** Después de modificar el ArrayList, **SIEMPRE** debes llamar a `adapter.notifyDataSetChanged()`.
+
+---
+
+## 📖 8. AlertDialog - Cuadros de diálogo
+
+### AlertDialog básico:
+
+```java
+new AlertDialog.Builder(this)
+    .setTitle("Título")
+    .setMessage("Mensaje del diálogo")
+    .setPositiveButton("Aceptar", (dialog, which) -> {
+        // Acción al pulsar Aceptar
+    })
+    .setNegativeButton("Cancelar", null)
+    .show();
+```
+
+### AlertDialog con input:
+
+```java
+EditText input = new EditText(this);
+input.setHint("Introduce un nombre");
+
+new AlertDialog.Builder(this)
+    .setTitle("Añadir nombre")
+    .setView(input)
+    .setPositiveButton("Añadir", (dialog, which) -> {
+        String nombre = input.getText().toString().trim();
+        if (!nombre.isEmpty()) {
+            listaNombres.add(nombre);
+            adapter.notifyDataSetChanged();
+        }
+    })
+    .setNegativeButton("Cancelar", null)
+    .show();
+```
+
+---
+
+## 🎯 EJERCICIO 7: Lista de Tareas (To-Do List)
+
+**📝 Objetivo:** Crear una app de lista de tareas con operaciones CRUD.
+
+**📋 Requisitos:**
+
+1. ListView para mostrar tareas
+2. EditText + Button para añadir
+3. Click en item → Toast
+4. Click largo → Eliminar con confirmación
+5. Button "Limpiar Todo"
+6. Contador de tareas
+
+[Ver layout y código completo en la sección anterior]
+
+---
+
+## 🎯 EJERCICIO 8: Lista de Contactos
+
+**📝 Objetivo:** Lista de contactos con nombre y teléfono.
+
+**📋 Requisitos:**
+
+1. ListView con contactos
+2. Button "Añadir" → AlertDialog con dos EditText
+3. Click en contacto → Opciones (Ver, Llamar, Eliminar)
+4. Intent implícito para llamar
+
+[Ver layout y código completo en la sección anterior]
+
+---
+
+## 📝 CHECKLIST DÍA 4
+
+- [ ] Entiendes qué es un ListView
+- [ ] Sabes crear un ArrayAdapter
+- [ ] Conoces los layouts predefinidos
+- [ ] Puedes usar `setOnItemClickListener()`
+- [ ] Puedes usar `setOnItemLongClickListener()`
+- [ ] Entiendes ArrayList y sus métodos
+- [ ] Recuerdas `notifyDataSetChanged()`
+- [ ] Sabes crear AlertDialog
+- [ ] Has completado Ejercicio 7
+- [ ] Has completado Ejercicio 8
+
+---
+
+## 🎓 CONCEPTOS CLAVE DEL DÍA 4
+
+|Concepto|Definición|
+|---|---|
+|**ListView**|Componente para mostrar listas desplazables|
+|**ArrayAdapter**|Conecta datos con el ListView|
+|**ArrayList**|Lista dinámica que puede crecer/decrecer|
+|**notifyDataSetChanged()**|Actualiza el ListView tras cambios en datos|
+|**OnItemClickListener**|Evento al pulsar un item|
+|**OnItemLongClickListener**|Evento al mantener pulsado un item|
+|**AlertDialog**|Cuadro de diálogo modal|
+
+---
+
+[🔝 Volver al índice](#-%C3%ADndice-general)
+
+---
+
+📌 **Guardado:** 27/02/2026 - 16:00h  
+📌 **Próxima sesión:** Día 5 - ArrayAdapter Personalizado

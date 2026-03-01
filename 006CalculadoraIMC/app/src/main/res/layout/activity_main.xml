@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/main"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="CALCULADORA DE IMC"
+        android:textSize="24sp"
+        android:textStyle="bold"/>
+
+    <!-- Label Peso -->
+    <TextView
+        android:id="@+id/lblPeso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtTitulo"
+        android:layout_marginTop="40dp"
+        android:text="Peso (kg):"
+        android:textStyle="bold"/>
+
+    <!-- EditText Peso -->
+    <EditText
+        android:id="@+id/etPeso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lblPeso"
+        android:layout_marginTop="5dp"
+        android:hint="Ej: 70"
+        android:inputType="numberDecimal"/>
+
+    <!-- Label Altura -->
+    <TextView
+        android:id="@+id/lblAltura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etPeso"
+        android:layout_marginTop="20dp"
+        android:text="Altura (cm):"
+        android:textStyle="bold"/>
+
+    <!-- EditText Altura -->
+    <EditText
+        android:id="@+id/etAltura"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lblAltura"
+        android:layout_marginTop="5dp"
+        android:hint="Ej: 175"
+        android:inputType="numberDecimal"/>
+
+    <!-- Botón Calcular -->
+    <Button
+        android:id="@+id/btnCalcular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etAltura"
+        android:layout_marginTop="30dp"
+        android:text="CALCULAR IMC"/>
+
+    <!-- Panel de resultado -->
+    <LinearLayout
+        android:id="@+id/panelResultado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnCalcular"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:background="#E3F2FD">
+
+        <TextView
+            android:id="@+id/txtIMC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tu IMC: "
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/txtCategoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Categoría: "
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

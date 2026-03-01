@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Notas_Android.md.md",
+                "file": "Notas_Android.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Notas_Android.md"
+              "title": "Notas_Android"
             }
           }
         ]
@@ -186,6 +186,6 @@
   },
   "active": "fe2280ae9811b536",
   "lastOpenFiles": [
-    "Notas_Android.md.md"
+    "Notas_Android.md"
   ]
 }

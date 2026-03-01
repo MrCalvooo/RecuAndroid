@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">005ConversorUnidades</string>
+
+    <string-array name="conversiones">
+        <item>Kilómetros a Millas</item>
+        <item>Millas a Kilómetros</item>
+        <item>Celsius a Fahrenheit</item>
+        <item>Fahrenheit a Celsius</item>
+    </string-array>
+</resources>
