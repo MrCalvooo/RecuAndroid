@@ -1,4 +1,3 @@
-
 **Fecha de inicio:** 25 de Febrero 2026  
 **Fecha estimada de examen:** Finales de Mayo - Principios de Junio 2026
 
@@ -2533,3 +2532,244 @@ new AlertDialog.Builder(this)
 
 📌 **Guardado:** 27/02/2026 - 16:00h  
 📌 **Próxima sesión:** Día 5 - ArrayAdapter Personalizado
+
+---
+
+# 🎯 DÍA 5 - ArrayAdapter Personalizado
+
+**Fecha:** 28 de Febrero 2026  
+**Duración:** 2-3 horas  
+**Objetivos:** Crear adaptadores personalizados para listas complejas con imágenes y múltiples datos
+
+---
+
+## 📖 1. ¿Por qué ArrayAdapter Personalizado?
+
+Hasta ahora: `android.R.layout.simple_list_item_1` → solo una línea de texto.
+
+Ahora queremos:
+
+- 📷 Imagen + múltiples textos
+- 🎨 Diseños personalizados
+- ⭐ Iconos, botones, etc.
+
+**Solución:** Crear nuestro **propio ArrayAdapter** y **layout XML** personalizado.
+
+---
+
+## 📖 2. Los 3 componentes necesarios
+
+```
+┌──────────────────────────────────────────┐
+│  1. Clase Modelo (Producto, Persona...)  │
+│     ↓                                    │
+│  2. Layout XML del item                  │
+│     ↓                                    │
+│  3. ArrayAdapter Personalizado           │
+└──────────────────────────────────────────┘
+```
+
+---
+
+## 📖 3. Ejemplo completo: Lista de Productos
+
+### PASO 1: Clase Modelo
+
+```java
+public class Producto {
+    private String nombre;
+    private String descripcion;
+    private double precio;
+    private int imagen; // R.drawable.producto1
+    
+    public Producto(String nombre, String descripcion, double precio, int imagen) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.imagen = imagen;
+    }
+    
+    // Getters...
+}
+```
+
+### PASO 2: Layout del item (item_producto.xml)
+
+```xml
+<LinearLayout ...
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/imgProducto"
+        android:layout_width="80dp"
+        android:layout_height="80dp"/>
+
+    <LinearLayout
+        android:orientation="vertical">
+        
+        <TextView android:id="@+id/txtNombre" ... />
+        <TextView android:id="@+id/txtDescripcion" ... />
+        <TextView android:id="@+id/txtPrecio" ... />
+        
+    </LinearLayout>
+
+</LinearLayout>
+```
+
+### PASO 3: Adapter Personalizado
+
+```java
+public class ProductoAdapter extends ArrayAdapter<Producto> {
+    
+    private Context context;
+    private ArrayList<Producto> productos;
+    
+    public ProductoAdapter(Context context, ArrayList<Producto> productos) {
+        super(context, 0, productos);
+        this.context = context;
+        this.productos = productos;
+    }
+    
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        // 1. Obtener producto
+        Producto producto = productos.get(position);
+        
+        // 2. Inflar layout si es necesario
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_producto, parent, false);
+        }
+        
+        // 3. Referenciar vistas
+        ImageView imgProducto = convertView.findViewById(R.id.imgProducto);
+        TextView txtNombre = convertView.findViewById(R.id.txtNombre);
+        TextView txtPrecio = convertView.findViewById(R.id.txtPrecio);
+        
+        // 4. Rellenar datos
+        imgProducto.setImageResource(producto.getImagen());
+        txtNombre.setText(producto.getNombre());
+        txtPrecio.setText(String.format("%.2f€", producto.getPrecio()));
+        
+        // 5. Devolver vista
+        return convertView;
+    }
+}
+```
+
+### PASO 4: Uso en MainActivity
+
+```java
+ArrayList<Producto> productos = new ArrayList<>();
+productos.add(new Producto("Laptop", "Intel i5", 599.99, R.drawable.laptop));
+
+ProductoAdapter adapter = new ProductoAdapter(this, productos);
+listView.setAdapter(adapter);
+```
+
+---
+
+## 📖 4. ViewHolder Pattern (Optimización)
+
+```java
+public class ProductoAdapter extends ArrayAdapter<Producto> {
+    
+    // ViewHolder: Almacena referencias
+    static class ViewHolder {
+        ImageView imgProducto;
+        TextView txtNombre;
+        TextView txtPrecio;
+    }
+    
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+        
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_producto, parent, false);
+            
+            holder = new ViewHolder();
+            holder.imgProducto = convertView.findViewById(R.id.imgProducto);
+            holder.txtNombre = convertView.findViewById(R.id.txtNombre);
+            holder.txtPrecio = convertView.findViewById(R.id.txtPrecio);
+            
+            convertView.setTag(holder); // Guardar
+        } else {
+            holder = (ViewHolder) convertView.getTag(); // Reutilizar
+        }
+        
+        // Rellenar datos
+        Producto producto = productos.get(position);
+        holder.imgProducto.setImageResource(producto.getImagen());
+        holder.txtNombre.setText(producto.getNombre());
+        holder.txtPrecio.setText(String.format("%.2f€", producto.getPrecio()));
+        
+        return convertView;
+    }
+}
+```
+
+**🔑 Ventaja:** `findViewById()` solo se ejecuta **una vez** por vista.
+
+---
+
+## 🎯 EJERCICIO 9: Lista de Películas
+
+**Requisitos:**
+
+1. Clase Pelicula (titulo, director, año, calificacion, imagen)
+2. Layout personalizado con póster + info
+3. Adapter con ViewHolder
+4. Color según calificación (verde >= 7, naranja 5-6.9, rojo < 5)
+5. Click → AlertDialog con info completa
+
+[Ver layout y código completo en la sección anterior]
+
+---
+
+## 🎯 EJERCICIO 10: Contactos Mejorada
+
+**Requisitos:**
+
+1. Añadir foto y email a Contacto
+2. Layout con avatar circular
+3. Adapter personalizado
+4. Click largo → Editar/Eliminar
+5. EXTRA: Botón favorito ⭐
+
+[Ver layout y código completo en la sección anterior]
+
+---
+
+## 📝 CHECKLIST DÍA 5
+
+- [ ] Entiendes por qué usar adapter personalizado
+- [ ] Sabes crear clase modelo
+- [ ] Puedes crear layout XML para items
+- [ ] Sabes extender ArrayAdapter
+- [ ] Entiendes LayoutInflater.inflate()
+- [ ] Conoces el patrón ViewHolder
+- [ ] Entiendes convertView (reutilización)
+- [ ] Has completado Ejercicio 9
+- [ ] Has completado Ejercicio 10
+
+---
+
+## 🎓 CONCEPTOS CLAVE DEL DÍA 5
+
+|Concepto|Definición|
+|---|---|
+|**ArrayAdapter personalizado**|Adaptador que usa layout propio para items|
+|**getView()**|Método que crea/reutiliza la vista de cada item|
+|**LayoutInflater**|Convierte XML en objetos View|
+|**ViewHolder**|Patrón para optimizar findViewById()|
+|**convertView**|Vista reutilizada (null si es nueva)|
+|**setTag() / getTag()**|Guardar/recuperar objetos en vistas|
+
+---
+
+[🔝 Volver al índice](#-%C3%ADndice-general)
+
+---
+
+📌 **Guardado:** 28/02/2026 - 17:00h  
+📌 **Próxima sesión:** Día 6 - GridView
