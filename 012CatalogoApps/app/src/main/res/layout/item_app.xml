@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F5F5F5"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/imgFoto"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/txtNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Título"
+        android:textColor="#000000"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/txtCategoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Categoria"
+        android:textColor="#000000"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/txtValoracion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Valoracion"
+        android:textColor="#000000"
+        android:textSize="12sp" />
+
+
+</LinearLayout>

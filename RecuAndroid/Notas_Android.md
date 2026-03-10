@@ -2773,3 +2773,442 @@ public class ProductoAdapter extends ArrayAdapter<Producto> {
 
 📌 **Guardado:** 28/02/2026 - 17:00h  
 📌 **Próxima sesión:** Día 6 - GridView
+
+---
+
+# 🎯 DÍA 6 - GridView
+
+**Fecha:** 1 de Marzo 2026  
+**Duración:** 2-3 horas  
+**Objetivos:** Crear listas en formato cuadrícula usando GridView
+
+---
+
+## 📖 1. ¿Qué es un GridView?
+
+El `GridView` muestra elementos en **cuadrícula** en lugar de lista vertical.
+
+### Comparación visual:
+
+```
+ListView:                GridView (2x2):
+┌──────────────┐         ┌─────┬─────┐
+│   Item 1     │         │ 1   │ 2   │
+├──────────────┤         ├─────┼─────┤
+│   Item 2     │         │ 3   │ 4   │
+├──────────────┤         └─────┴─────┘
+│   Item 3     │
+└──────────────┘
+```
+
+**Casos de uso:**
+
+- 📷 Galerías de fotos
+- 🛍️ Catálogos de productos
+- 📱 Grids de apps
+- 🎬 Carteles de películas
+
+---
+
+## 📖 2. GridView básico
+
+### XML:
+
+```xml
+<GridView
+    android:id="@+id/gridView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:numColumns="2"
+    android:verticalSpacing="10dp"
+    android:horizontalSpacing="10dp"
+    android:padding="10dp"
+    android:stretchMode="columnWidth"/>
+```
+
+**Atributos clave:**
+
+|Atributo|Uso|
+|---|---|
+|`numColumns`|Número de columnas (2, 3, auto_fit)|
+|`verticalSpacing`|Espacio vertical entre items|
+|`horizontalSpacing`|Espacio horizontal entre items|
+|`columnWidth`|Ancho de columna (con auto_fit)|
+
+---
+
+## 📖 3. GridView con adaptador personalizado
+
+**Igual que ListView:** Usar ViewHolder, LayoutInflater, getView()
+
+**Diferencia:** Layout del item típicamente vertical (imagen arriba, texto abajo)
+
+---
+
+## 🎯 EJERCICIO 11: Galería de Imágenes
+
+**Requisitos:**
+
+1. Clase Imagen (titulo, recurso)
+2. GridView 2 columnas
+3. Item: ImageView 150x150 + TextView
+4. Adaptador con ViewHolder
+5. 9+ imágenes
+6. Click → AlertDialog con imagen grande
+
+---
+
+## 🎯 EJERCICIO 12: Catálogo de Apps
+
+**Requisitos:**
+
+1. Clase App (nombre, categoría, valoración, icono)
+2. GridView 3 columnas
+3. Icono circular 80dp
+4. Estrellas de valoración
+5. 12+ apps
+6. Click → AlertDialog con botón "Instalar"
+
+---
+
+## 📝 CHECKLIST DÍA 6
+
+- [ ] Entiendes GridView vs ListView
+- [ ] Sabes usar numColumns
+- [ ] Puedes crear adaptador para GridView
+- [ ] Has completado Ejercicio 11
+- [ ] Has completado Ejercicio 12
+
+---
+
+## 🎓 CONCEPTOS CLAVE DEL DÍA 6
+
+|Concepto|Definición|
+|---|---|
+|**GridView**|Lista en formato cuadrícula|
+|**numColumns**|Número de columnas del grid|
+|**auto_fit**|Ajusta columnas automáticamente|
+|**columnWidth**|Ancho de cada columna|
+
+---
+
+[🔝 Volver al índice](#-%C3%ADndice-general)
+
+---
+
+📌 **Guardado:** 01/03/2026 - 11:45h  
+📌 **Próxima sesión:** Día 7 - Eventos avanzados en listas
+
+---
+
+# 🎯 DÍA 7 - Eventos Avanzados en Listas
+
+**Fecha:** 2 de Marzo 2026  
+**Duración:** 2-3 horas  
+**Objetivos:** Dominar eventos avanzados y técnicas en ListView/GridView
+
+---
+
+## 📖 1. OnItemClickListener vs onClick en el item
+
+**OnItemClickListener:** Click en TODO el item (desde la Activity) **onClick en adaptador:** Botones ESPECÍFICOS dentro del item
+
+```java
+// OPCIÓN 1: Click en todo el item
+listView.setOnItemClickListener((parent, view, position, id) -> {
+    // ...
+});
+
+// OPCIÓN 2: Botón específico (en getView del adaptador)
+holder.btnComprar.setOnClickListener(v -> {
+    // ...
+});
+```
+
+---
+
+## 📖 2. Botones dentro de items
+
+**Problema:** position puede estar desactualizado por reutilización
+
+**✅ Solución:** Usar setTag()
+
+```java
+holder.btnComprar.setTag(position);
+holder.btnComprar.setOnClickListener(v -> {
+    int pos = (int) v.getTag();
+    Producto p = productos.get(pos);
+    // ...
+});
+```
+
+---
+
+## 📖 3. Selección múltiple con CheckBox
+
+Mantener ArrayList<Boolean> con estados:
+
+```java
+private ArrayList<Boolean> seleccionados;
+
+// En getView():
+holder.checkbox.setChecked(seleccionados.get(position));
+holder.checkbox.setOnCheckedChangeListener((btn, isChecked) -> {
+    seleccionados.set(position, isChecked);
+});
+```
+
+---
+
+## 📖 4. Filtrar lista (búsqueda)
+
+```java
+private void filtrar(String texto) {
+    productosFiltrados.clear();
+    if (texto.isEmpty()) {
+        productosFiltrados.addAll(productosTodos);
+    } else {
+        for (Producto p : productosTodos) {
+            if (p.getNombre().toLowerCase().contains(texto.toLowerCase())) {
+                productosFiltrados.add(p);
+            }
+        }
+    }
+    adapter.notifyDataSetChanged();
+}
+```
+
+---
+
+## 📖 5. EmptyView
+
+```java
+listView.setEmptyView(emptyTextView);
+// Se muestra automáticamente cuando la lista está vacía
+```
+
+---
+
+## 🎯 EJERCICIO 13: To-Do List Avanzada
+
+**Requisitos:**
+
+1. CheckBox para marcar completadas
+2. Contador "X de Y completadas"
+3. Botón "Eliminar completadas"
+4. Búsqueda/filtro
+5. EmptyView
+6. Texto tachado cuando completada
+
+---
+
+## 🎯 EJERCICIO 14: Carrito de Compras
+
+**Requisitos:**
+
+1. Botones +/- para cantidad
+2. Mostrar cantidad actual
+3. Botón eliminar por item
+4. Total dinámico
+5. Botón "Vaciar carrito"
+
+---
+
+## 📝 CHECKLIST DÍA 7
+
+- [ ] Entiendes OnItemClickListener vs onClick
+- [ ] Sabes usar setTag() para posiciones
+- [ ] Puedes implementar selección múltiple
+- [ ] Sabes filtrar listas
+- [ ] Has completado Ejercicio 13
+- [ ] Has completado Ejercicio 14
+
+---
+
+## 🎓 CONCEPTOS CLAVE DEL DÍA 7
+
+|Concepto|Definición|
+|---|---|
+|**setTag()**|Guardar datos en una vista|
+|**TextWatcher**|Detectar cambios en EditText|
+|**setEmptyView()**|Vista cuando lista vacía|
+|**STRIKE_THRU_TEXT_FLAG**|Texto tachado|
+
+---
+
+[🔝 Volver al índice](#-%C3%ADndice-general)
+
+---
+
+📌 **Guardado:** 02/03/2026 - 13:00h  
+📌 **Próxima sesión:** Día 8 - Repaso Semanas 1-2
+
+---
+
+# 🎯 DÍA 9 - Menús en Android
+
+**Fecha:** 4 de Marzo 2026  
+**Duración:** 2-3 horas  
+**Objetivos:** Dominar Options Menu, Context Menu y Popup Menu
+
+---
+
+## 📖 TIPOS DE MENÚS
+
+### 1. Options Menu
+
+- Barra superior (⋮ tres puntos)
+- `onCreateOptionsMenu()` + `onOptionsItemSelected()`
+
+### 2. Context Menu
+
+- Click largo en vistas
+- `registerForContextMenu()` + `onContextItemSelected()`
+
+### 3. Popup Menu
+
+- Click en botón/vista
+- `PopupMenu` + `setOnMenuItemClickListener()`
+
+---
+
+## 📖 OPTIONS MENU
+
+**res/menu/menu_main.xml:**
+
+```xml
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <item
+        android:id="@+id/action_search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="Buscar"
+        app:showAsAction="ifRoom"/>
+        
+    <item
+        android:id="@+id/action_settings"
+        android:title="Configuración"
+        app:showAsAction="never"/>
+</menu>
+```
+
+**En Activity:**
+
+```java
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_main, menu);
+    return true;
+}
+
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == R.id.action_search) {
+        // Acción
+        return true;
+    }
+    return super.onOptionsItemSelected(item);
+}
+```
+
+---
+
+## 📖 CONTEXT MENU
+
+```java
+// Registrar vista
+registerForContextMenu(listView);
+
+@Override
+public void onCreateContextMenu(ContextMenu menu, View v, ...) {
+    getMenuInflater().inflate(R.menu.menu_context, menu);
+}
+
+@Override
+public boolean onContextItemSelected(MenuItem item) {
+    AdapterView.AdapterContextMenuInfo info = 
+        (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+    int position = info.position; // Posición del item
+    
+    if (item.getItemId() == R.id.context_delete) {
+        lista.remove(position);
+        return true;
+    }
+    return super.onContextItemSelected(item);
+}
+```
+
+---
+
+## 📖 POPUP MENU
+
+```java
+private void mostrarPopupMenu(View view) {
+    PopupMenu popup = new PopupMenu(this, view);
+    popup.getMenuInflater().inflate(R.menu.menu_popup, popup.getMenu());
+    
+    popup.setOnMenuItemClickListener(item -> {
+        if (item.getItemId() == R.id.popup_edit) {
+            // Acción
+            return true;
+        }
+        return false;
+    });
+    
+    popup.show();
+}
+```
+
+---
+
+## 🎯 EJERCICIO 15: App de Notas con Menús
+
+**Requisitos:**
+
+1. Options Menu: Nueva nota, buscar, estadísticas
+2. Context Menu: Editar, eliminar, compartir, favorita
+3. Popup Menu en cada nota: Editar, duplicar, color
+4. Clase Nota (titulo, contenido, fecha, favorita)
+5. Compartir con Intent.ACTION_SEND
+
+---
+
+## 🎯 EJERCICIO 16: Contactos con Menús
+
+**Requisitos:**
+
+1. Options Menu: Añadir, buscar, ordenar, exportar
+2. Context Menu: Editar, eliminar, llamar, email, VIP
+3. Estadísticas: total, VIP, último añadido
+
+---
+
+## 📝 CHECKLIST DÍA 9
+
+- [ ] Entiendes los 3 tipos de menús
+- [ ] Sabes crear XMLs de menús
+- [ ] Puedes inflar y manejar menús
+- [ ] Usas AdapterContextMenuInfo para posiciones
+- [ ] Has completado Ejercicio 15
+- [ ] Has completado Ejercicio 16
+
+---
+
+## 🎓 CONCEPTOS CLAVE DEL DÍA 9
+
+|Concepto|Uso|
+|---|---|
+|**showAsAction**|never/ifRoom/always|
+|**registerForContextMenu()**|Activar menú contextual|
+|**AdapterContextMenuInfo**|Obtener posición en lista|
+|**PopupMenu**|Menú anclado a vista|
+
+---
+
+[🔝 Volver al índice](#-%C3%ADndice-general)
+
+---
+
+📌 **Guardado:** 04/03/2026 - 16:00h  
+📌 **Próxima sesión:** Día 10 - Diálogos avanzados

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/etNombreNuevo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Nombre nuevo">
+    </EditText>
+
+    <EditText
+        android:id="@+id/etEdadNueva"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Edad">
+    </EditText>
+
+    <Spinner
+        android:id="@+id/spinnerCurso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </Spinner>
+
+    <RadioGroup
+        android:id="@+id/rgGeneroNuevo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <RadioButton
+            android:id="@+id/rbMasculinoNuevo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Masculino"/>
+
+        <RadioButton
+            android:id="@+id/rbFemeninoNuevo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Femenino"/>
+
+        <RadioButton
+            android:id="@+id/rbOtroNuevo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Otro"/>
+    </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/cbRepiteNuevo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¿Repite curso?"
+        android:layout_marginTop="8dp"/>
+
+</LinearLayout>

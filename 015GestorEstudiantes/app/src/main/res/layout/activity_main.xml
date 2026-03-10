@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- TÍTULO -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GESTOR DE ESTUDIANTES"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- FORMULARIO DE REGISTRO -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registro de Estudiante"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/etNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre completo"
+        android:inputType="textPersonName"/>
+
+    <EditText
+        android:id="@+id/etEdad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Edad"
+        android:inputType="number"
+        android:layout_marginTop="8dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerGrado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Género:"
+        android:layout_marginTop="8dp"/>
+
+    <RadioGroup
+        android:id="@+id/rgGenero"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbMasculino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Masculino"/>
+
+        <RadioButton
+            android:id="@+id/rbFemenino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Femenino"/>
+
+        <RadioButton
+            android:id="@+id/rbOtro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Otro"/>
+    </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/cbRepite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¿Repite curso?"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/btnAgregar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Añadir Estudiante"
+        android:layout_marginTop="16dp"/>
+
+    <!-- FILTROS -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filtros"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/etBuscar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Buscar por nombre..."
+        android:drawableStart="@android:drawable/ic_menu_search"
+        android:drawablePadding="8dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerFiltroGrado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"/>
+
+    <CheckBox
+        android:id="@+id/cbSoloRepetidores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Solo repetidores"
+        android:layout_marginTop="8dp"/>
+
+    <!-- ESTADÍSTICAS -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Estadísticas"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/txtEstadisticas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total: 0 | Edad media: 0 | Repetidores: 0"
+        android:textSize="14sp"/>
+
+    <!-- LISTA DE ESTUDIANTES -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lista de Estudiantes"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <ListView
+        android:id="@+id/lvEstudiantes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="#E0E0E0"
+        android:dividerHeight="1dp"/>
+
+    <!-- BOTONES -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/btnLimpiar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Limpiar Todo"
+            android:backgroundTint="#F44336"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnExportar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Exportar Datos"
+            android:backgroundTint="#4CAF50"/>
+    </LinearLayout>
+
+</LinearLayout>

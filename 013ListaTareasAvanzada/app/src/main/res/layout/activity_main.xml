@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/main"
+    android:padding="16dp">
+
+    <!-- Título -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LISTA DE TAREAS"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- Contador de tareas -->
+    <TextView
+        android:id="@+id/txtContador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tareas: 0"
+        android:textSize="16sp"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Campo de entrada -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <EditText
+            android:id="@+id/etTarea"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Nueva tarea..."
+            android:inputType="text"
+            android:imeOptions="actionDone"/>
+
+        <Button
+            android:id="@+id/btnAgregar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Añadir"
+            android:layout_marginStart="10dp"/>
+    </LinearLayout>
+
+    <!-- Botón limpiar -->
+    <Button
+        android:id="@+id/btnLimpiar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Limpiar Todo"
+        android:layout_marginBottom="10dp"/>
+
+    <Button
+        android:id="@+id/btnLimpiarCompletadas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Limpiar completadas"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- ListView de tareas -->
+    <ListView
+        android:id="@+id/listViewTareas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="#CCCCCC"
+        android:dividerHeight="1dp"/>
+
+</LinearLayout>
