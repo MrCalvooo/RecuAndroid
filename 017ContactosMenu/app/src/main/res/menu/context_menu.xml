@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/itemEditar"
+        android:title="Editar contacto">
+    </item>
+    <item
+        android:id="@+id/itemEliminar"
+        android:title="Eliminar contacto">
+    </item>
+    <item
+        android:id="@+id/itemLlamar"
+        android:title="Llamar">
+    </item>
+    <item
+        android:id="@+id/itemEnviarEmail"
+        android:title="Enviar email">
+    </item>
+    <item
+        android:id="@+id/itemVIP"
+        android:title="Marcar como VIP">
+    </item>
 </menu>

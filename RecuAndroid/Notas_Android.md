@@ -29,9 +29,9 @@
 
 **[SEMANAS 5-6: MENÚS Y DIÁLOGOS](#semanas-5-6-men%C3%BAs-y-di%C3%A1logos)**
 
-- Día 9 - Menú de Opciones _(Próximamente)_
-- Día 10 - AlertDialog _(Próximamente)_
-- Día 11 - TimePickerDialog y DatePickerDialog _(Próximamente)_
+- [Día 9 - Menú de Opciones](#d%C3%ADa-9---men%C3%BAs-en-android) ✅
+- [Día 10 - AlertDialog](#d%C3%ADa-10---alertdialog) ✅
+- [Día 11 - TimePickerDialog y DatePickerDialog](#d%C3%ADa-11---timepickerdialog-y-datepickerdialog) ✅
 - Día 12 - Context Menu y PopupMenu _(Próximamente)_
 
 **[SEMANAS 7-8: PERSISTENCIA DE DATOS](#semanas-7-8-persistencia-de-datos)**
@@ -100,6 +100,39 @@
 10. [Solución Ejercicio 4](#soluci%C3%B3n-ejercicio-4-calculadora-simple)
 11. [Checklist Día 2](#checklist-d%C3%ADa-2)
 12. [Conceptos Clave Día 2](#conceptos-clave-del-d%C3%ADa-2)
+
+---
+
+### 📖 ÍNDICE DETALLADO DEL DÍA 10
+
+1. [Introducción a AlertDialog](#1-introducci%C3%B3n-a-alertdialog)
+2. [AlertDialog Simple](#2-alertdialog-simple)
+3. [AlertDialog con Botones](#3-alertdialog-con-botones-positivo-negativo-neutral)
+4. [AlertDialog con Lista](#4-alertdialog-con-lista-simple)
+5. [AlertDialog con SingleChoice](#5-alertdialog-con-singlechoice-radio-buttons)
+6. [AlertDialog con MultipleChoice](#6-alertdialog-con-multiplechoice-checkboxes)
+7. [AlertDialog con EditText](#7-alertdialog-con-edittext-layout-personalizado)
+8. [ProgressDialog](#8-progressdialog)
+9. [Ejercicio 17: Sistema de Confirmaciones](#ejercicio-17-sistema-de-confirmaciones)
+10. [Ejercicio 18: Configurador de Perfil](#ejercicio-18-configurador-de-perfil)
+11. [Checklist Día 10](#checklist-d%C3%ADa-10)
+12. [Conceptos Clave Día 10](#conceptos-clave-del-d%C3%ADa-10)
+
+---
+
+### 📖 ÍNDICE DETALLADO DEL DÍA 11
+
+1. [Introducción a DatePicker y TimePicker](#1-introducci%C3%B3n-a-datepicker-y-timepicker)
+2. [TimePickerDialog](#2-timepickerdialog)
+3. [DatePickerDialog](#3-datepickerdialog)
+4. [Formatear Fecha y Hora](#4-formatear-fecha-y-hora)
+5. [Calendar - Obtener fecha actual](#5-calendar---obtener-fecha-actual)
+6. [Validaciones de Fechas](#6-validaciones-de-fechas)
+7. [DatePicker y TimePicker en XML](#7-datepicker-y-timepicker-en-xml-vistas-embebidas)
+8. [Ejercicio 19: Agenda de Citas](#ejercicio-19-agenda-de-citas)
+9. [Ejercicio 20: Recordatorios](#ejercicio-20-recordatorios)
+10. [Checklist Día 11](#checklist-d%C3%ADa-11)
+11. [Conceptos Clave Día 11](#conceptos-clave-del-d%C3%ADa-11)
 
 ---
 
@@ -346,6 +379,7 @@ public class MainActivity extends AppCompatActivity {
 **💡 Pistas:**
 
 - Necesitarás una variable `int contador = 0;` como atributo de la clase
+    
 - En el onClick del primer botón:
     
     ```java
@@ -353,6 +387,7 @@ public class MainActivity extends AppCompatActivity {
     ```
     
 - En el onClick del segundo botón: resetea `contador` a 0 y actualiza el TextView
+    
 
 ---
 
@@ -460,6 +495,7 @@ public class MainActivity extends AppCompatActivity {
 **💡 Pistas:**
 
 - En el layout XML, dale un `android:id="@+id/layoutPrincipal"` al LinearLayout
+    
 - En Java:
     
     ```java
@@ -467,6 +503,7 @@ public class MainActivity extends AppCompatActivity {
     ```
     
 - Importar: `import android.graphics.Color;`
+    
 - Para color aleatorio:
     
     ```java
@@ -2946,7 +2983,7 @@ holder.btnComprar.setOnClickListener(v -> {
 
 ## 📖 3. Selección múltiple con CheckBox
 
-Mantener ArrayList<Boolean> con estados:
+Mantener ArrayList\<Boolean> con estados:
 
 ```java
 private ArrayList<Boolean> seleccionados;
@@ -3211,4 +3248,1335 @@ private void mostrarPopupMenu(View view) {
 ---
 
 📌 **Guardado:** 04/03/2026 - 16:00h  
-📌 **Próxima sesión:** Día 10 - Diálogos avanzados
+📌 **Próxima sesión:** Día 10 - AlertDialog
+
+---
+
+# 🎯 DÍA 10 - AlertDialog
+
+**Fecha:** 6 de Marzo 2026  
+**Duración:** 2-3 horas  
+**Objetivos:** Dominar AlertDialog en todas sus variantes y crear diálogos personalizados
+
+---
+
+## 📖 1. Introducción a AlertDialog
+
+Un **AlertDialog** es una ventana emergente que interrumpe el flujo de la aplicación para mostrar información importante o solicitar confirmación del usuario.
+
+### ¿Cuándo usar AlertDialog?
+
+✅ **SÍ usar para:**
+
+- Confirmaciones de eliminación
+- Advertencias importantes
+- Selección de opciones
+- Formularios cortos
+- Progreso de tareas
+
+❌ **NO usar para:**
+
+- Mensajes informativos breves → usar **Toast**
+- Notificaciones del sistema → usar **Notification**
+- Selección de fecha/hora → usar **DatePickerDialog/TimePickerDialog**
+
+---
+
+## 📖 2. AlertDialog Simple
+
+El diálogo más básico con título, mensaje y un botón.
+
+```java
+new AlertDialog.Builder(this)
+    .setTitle("Título del Diálogo")
+    .setMessage("Este es un mensaje informativo")
+    .setPositiveButton("Aceptar", null)
+    .show();
+```
+
+**Explicación:**
+
+- `Builder(this)` → Constructor que necesita el contexto (Activity)
+- `setTitle()` → Título del diálogo
+- `setMessage()` → Contenido del mensaje
+- `setPositiveButton()` → Botón principal (null = no hace nada al pulsar)
+- `show()` → **IMPORTANTE**: siempre al final para mostrar el diálogo
+
+---
+
+## 📖 3. AlertDialog con Botones (Positivo, Negativo, Neutral)
+
+```java
+new AlertDialog.Builder(this)
+    .setTitle("Confirmación")
+    .setMessage("¿Deseas eliminar este elemento?")
+    .setPositiveButton("Sí, eliminar", (dialog, which) -> {
+        // Acción al confirmar
+        Toast.makeText(this, "Eliminado", Toast.LENGTH_SHORT).show();
+    })
+    .setNegativeButton("Cancelar", (dialog, which) -> {
+        // Acción al cancelar
+        dialog.dismiss(); // Cerrar diálogo
+    })
+    .setNeutralButton("Más info", (dialog, which) -> {
+        // Acción alternativa
+        Toast.makeText(this, "Mostrando info...", Toast.LENGTH_SHORT).show();
+    })
+    .setCancelable(false) // No cerrar al tocar fuera
+    .show();
+```
+
+**Tipos de botones:**
+
+|Botón|Uso|Posición|Color|
+|---|---|---|---|
+|`setPositiveButton`|Acción principal (Aceptar, Sí, Guardar)|Derecha|Azul|
+|`setNegativeButton`|Cancelar, No|Izquierda|Gris|
+|`setNeutralButton`|Acción secundaria (Más info, Ayuda)|Centro|Gris|
+
+**Método `setCancelable()`:**
+
+- `true` (por defecto) → Se cierra al tocar fuera o pulsar BACK
+- `false` → Solo se cierra con los botones
+
+---
+
+## 📖 4. AlertDialog con Lista Simple
+
+Muestra una lista de opciones sin selección previa.
+
+```java
+String[] opciones = {"Opción 1", "Opción 2", "Opción 3"};
+
+new AlertDialog.Builder(this)
+    .setTitle("Selecciona una opción")
+    .setItems(opciones, (dialog, which) -> {
+        // which = índice de la opción seleccionada (0, 1, 2...)
+        String seleccionada = opciones[which];
+        Toast.makeText(this, "Seleccionaste: " + seleccionada, Toast.LENGTH_SHORT).show();
+    })
+    .show();
+```
+
+**Ejemplo práctico - Menú de acciones:**
+
+```java
+String[] acciones = {"Compartir", "Editar", "Eliminar"};
+
+new AlertDialog.Builder(this)
+    .setTitle("Acciones disponibles")
+    .setItems(acciones, (dialog, which) -> {
+        switch (which) {
+            case 0: // Compartir
+                compartir();
+                break;
+            case 1: // Editar
+                editar();
+                break;
+            case 2: // Eliminar
+                confirmarEliminar();
+                break;
+        }
+    })
+    .show();
+```
+
+---
+
+## 📖 5. AlertDialog con SingleChoice (Radio Buttons)
+
+Permite seleccionar **UNA** opción de varias. Ideal para configuraciones.
+
+```java
+String[] colores = {"Rojo", "Verde", "Azul"};
+int seleccionado = 0; // Índice seleccionado por defecto
+
+new AlertDialog.Builder(this)
+    .setTitle("Selecciona un color")
+    .setSingleChoiceItems(colores, seleccionado, (dialog, which) -> {
+        // Este listener se ejecuta al SELECCIONAR (no al pulsar OK)
+        seleccionado = which;
+    })
+    .setPositiveButton("Aceptar", (dialog, which) -> {
+        // Este listener se ejecuta al pulsar OK
+        String colorElegido = colores[seleccionado];
+        Toast.makeText(this, "Color: " + colorElegido, Toast.LENGTH_SHORT).show();
+    })
+    .setNegativeButton("Cancelar", null)
+    .show();
+```
+
+**⚠️ ERROR COMÚN:**
+
+```java
+// ❌ MAL: usar "which" del listener de setSingleChoiceItems
+.setSingleChoiceItems(colores, 0, (dialog, which) -> {
+    String color = colores[which]; // ❌ Se ejecuta al seleccionar
+})
+.setPositiveButton("Aceptar", (dialog, w) -> {
+    // ❌ No tenemos acceso a "which" aquí
+})
+
+// ✅ BIEN: guardar en variable externa
+int[] seleccionado = {0}; // Array para usar en lambda
+
+.setSingleChoiceItems(colores, seleccionado[0], (dialog, which) -> {
+    seleccionado[0] = which; // Guardar selección
+})
+.setPositiveButton("Aceptar", (dialog, w) -> {
+    String color = colores[seleccionado[0]]; // ✅ Usar variable
+})
+```
+
+---
+
+## 📖 6. AlertDialog con MultipleChoice (Checkboxes)
+
+Permite seleccionar **VARIAS** opciones. Ideal para filtros.
+
+```java
+String[] ingredientes = {"Tomate", "Lechuga", "Cebolla", "Queso"};
+boolean[] seleccionados = {false, true, false, true}; // Estados iniciales
+
+new AlertDialog.Builder(this)
+    .setTitle("Selecciona ingredientes")
+    .setMultiChoiceItems(ingredientes, seleccionados, (dialog, which, isChecked) -> {
+        // which = índice del item
+        // isChecked = true si se marcó, false si se desmarcó
+        seleccionados[which] = isChecked;
+    })
+    .setPositiveButton("Confirmar", (dialog, which) -> {
+        StringBuilder resultado = new StringBuilder("Seleccionados: ");
+        for (int i = 0; i < ingredientes.length; i++) {
+            if (seleccionados[i]) {
+                resultado.append(ingredientes[i]).append(", ");
+            }
+        }
+        Toast.makeText(this, resultado.toString(), Toast.LENGTH_LONG).show();
+    })
+    .setNegativeButton("Cancelar", null)
+    .show();
+```
+
+**Ejemplo con ArrayList:**
+
+```java
+ArrayList<String> seleccionados = new ArrayList<>();
+
+new AlertDialog.Builder(this)
+    .setTitle("Filtros")
+    .setMultiChoiceItems(opciones, null, (dialog, which, isChecked) -> {
+        String item = opciones[which];
+        if (isChecked) {
+            seleccionados.add(item);
+        } else {
+            seleccionados.remove(item);
+        }
+    })
+    .setPositiveButton("Aplicar", (dialog, which) -> {
+        filtrarPor(seleccionados);
+    })
+    .show();
+```
+
+---
+
+## 📖 7. AlertDialog con EditText (Layout Personalizado)
+
+Para crear formularios dentro de diálogos.
+
+### Opción 1: EditText directo (simple)
+
+```java
+EditText input = new EditText(this);
+input.setHint("Escribe tu nombre");
+
+new AlertDialog.Builder(this)
+    .setTitle("Nuevo Usuario")
+    .setView(input) // ✅ Añadir EditText al diálogo
+    .setPositiveButton("Guardar", (dialog, which) -> {
+        String nombre = input.getText().toString().trim();
+        if (nombre.isEmpty()) {
+            Toast.makeText(this, "El nombre no puede estar vacío", Toast.LENGTH_SHORT).show();
+        } else {
+            guardarNombre(nombre);
+        }
+    })
+    .setNegativeButton("Cancelar", null)
+    .show();
+```
+
+### Opción 2: Layout XML personalizado (avanzado)
+
+**res/layout/dialog_custom.xml:**
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/etNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre"/>
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:inputType="textEmailAddress"/>
+
+</LinearLayout>
+```
+
+**En Java:**
+
+```java
+// Inflar layout personalizado
+View dialogView = getLayoutInflater().inflate(R.layout.dialog_custom, null);
+EditText etNombre = dialogView.findViewById(R.id.etNombre);
+EditText etEmail = dialogView.findViewById(R.id.etEmail);
+
+new AlertDialog.Builder(this)
+    .setTitle("Registro")
+    .setView(dialogView) // ✅ Añadir layout completo
+    .setPositiveButton("Registrar", (dialog, which) -> {
+        String nombre = etNombre.getText().toString().trim();
+        String email = etEmail.getText().toString().trim();
+        
+        if (nombre.isEmpty() || email.isEmpty()) {
+            Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show();
+        } else {
+            registrarUsuario(nombre, email);
+        }
+    })
+    .setNegativeButton("Cancelar", null)
+    .show();
+```
+
+---
+
+## 📖 8. ProgressDialog
+
+⚠️ **DEPRECADO** desde Android 8.0, pero útil para entender el concepto.
+
+**Alternativa moderna:** ProgressBar dentro de AlertDialog
+
+```java
+// Crear diálogo con ProgressBar
+ProgressBar progressBar = new ProgressBar(this);
+
+AlertDialog dialog = new AlertDialog.Builder(this)
+    .setTitle("Cargando...")
+    .setMessage("Por favor espera")
+    .setView(progressBar)
+    .setCancelable(false)
+    .create();
+
+dialog.show();
+
+// Simular tarea larga
+new Handler().postDelayed(() -> {
+    dialog.dismiss();
+    Toast.makeText(this, "Completado", Toast.LENGTH_SHORT).show();
+}, 3000);
+```
+
+**Mejor práctica moderna:**
+
+```java
+// Layout con ProgressBar personalizado
+View dialogView = getLayoutInflater().inflate(R.layout.dialog_progress, null);
+ProgressBar progressBar = dialogView.findViewById(R.id.progressBar);
+TextView tvMensaje = dialogView.findViewById(R.id.tvMensaje);
+
+AlertDialog dialog = new AlertDialog.Builder(this)
+    .setView(dialogView)
+    .setCancelable(false)
+    .create();
+
+dialog.show();
+
+// Actualizar mensaje dinámicamente
+tvMensaje.setText("Procesando...");
+```
+
+---
+
+## 🎯 EJERCICIO 17: Sistema de Confirmaciones
+
+Crea una app de **Gestión de Tareas** con las siguientes funcionalidades:
+
+**Requisitos:**
+
+1. **ListView** con tareas (String simple)
+2. **Botón "Añadir"**: AlertDialog con EditText para nueva tarea
+3. **Click en tarea**: AlertDialog con lista de acciones:
+    - Marcar como completada
+    - Editar
+    - Eliminar
+    - Cancelar
+4. **Al editar**: AlertDialog con EditText prellenado
+5. **Al eliminar**: AlertDialog de confirmación con botones Sí/No
+6. **Validaciones**: No permitir tareas vacías
+
+**Pistas:**
+
+- Usa `ArrayList<String>` para las tareas
+- `ArrayAdapter` para el ListView
+- `adapter.notifyDataSetChanged()` después de modificar
+
+**Layout sugerido:**
+
+```xml
+<!-- activity_main.xml -->
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/btnAnadir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Añadir Tarea"/>
+
+    <ListView
+        android:id="@+id/listViewTareas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+</LinearLayout>
+```
+
+---
+
+## 🎯 EJERCICIO 18: Configurador de Perfil
+
+Crea una app de **Configuración de Perfil** con diálogos avanzados:
+
+**Requisitos:**
+
+1. **TextView** mostrando configuración actual
+2. **Botón "Nombre"**: AlertDialog con EditText
+3. **Botón "Tema"**: SingleChoice (Claro, Oscuro, Automático)
+4. **Botón "Notificaciones"**: MultipleChoice (Email, SMS, Push, Sonido)
+5. **Botón "Guardar"**: AlertDialog de confirmación
+6. **Botón "Resetear"**: AlertDialog de confirmación peligrosa
+7. Actualizar TextView al cambiar configuración
+
+**Datos a gestionar:**
+
+```java
+private String nombre = "Usuario";
+private String tema = "Claro";
+private ArrayList<String> notificaciones = new ArrayList<>();
+```
+
+**Layout sugerido:**
+
+```xml
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvConfiguracion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:background="#f0f0f0"/>
+
+    <Button
+        android:id="@+id/btnNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cambiar Nombre"/>
+
+    <Button
+        android:id="@+id/btnTema"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Seleccionar Tema"/>
+
+    <Button
+        android:id="@+id/btnNotificaciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Configurar Notificaciones"/>
+
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardar Cambios"/>
+
+    <Button
+        android:id="@+id/btnResetear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Resetear a Valores por Defecto"
+        android:backgroundTint="#d32f2f"
+        android:textColor="#ffffff"/>
+
+</LinearLayout>
+```
+
+---
+
+## 📝 CHECKLIST DÍA 10
+
+- [ ] Entiendes cuándo usar AlertDialog vs Toast
+- [ ] Sabes crear diálogos con 1, 2 o 3 botones
+- [ ] Diferencias setItems, setSingleChoice y setMultiChoice
+- [ ] Puedes añadir EditText a un diálogo
+- [ ] Sabes inflar layouts personalizados
+- [ ] Usas setCancelable correctamente
+- [ ] Has completado Ejercicio 17
+- [ ] Has completado Ejercicio 18
+
+---
+
+## 🎓 CONCEPTOS CLAVE DEL DÍA 10
+
+|Concepto|Definición|
+|---|---|
+|**AlertDialog.Builder**|Patrón constructor para crear diálogos|
+|**setPositiveButton**|Botón de acción principal (derecha, azul)|
+|**setNegativeButton**|Botón de cancelar (izquierda, gris)|
+|**setNeutralButton**|Botón de acción alternativa (centro, gris)|
+|**setItems**|Lista de opciones sin selección previa|
+|**setSingleChoiceItems**|RadioButtons (una sola opción)|
+|**setMultiChoiceItems**|CheckBoxes (múltiples opciones)|
+|**setView**|Añadir vista personalizada (EditText, layout XML)|
+|**setCancelable**|Permitir/bloquear cierre al tocar fuera|
+|**show()**|OBLIGATORIO al final para mostrar el diálogo|
+
+---
+
+## 🔍 COMPARATIVA RÁPIDA
+
+```java
+// ❌ MAL - Olvidar show()
+new AlertDialog.Builder(this)
+    .setTitle("Error")
+    .setMessage("Mensaje"); // No se muestra nada
+
+// ✅ BIEN
+new AlertDialog.Builder(this)
+    .setTitle("Correcto")
+    .setMessage("Mensaje")
+    .setPositiveButton("OK", null)
+    .show(); // ✅
+```
+
+```java
+// ❌ MAL - Usar "which" equivocado
+.setSingleChoiceItems(items, 0, (d, which) -> {
+    String item = items[which]; // Se ejecuta al seleccionar
+})
+.setPositiveButton("OK", (d, which) -> {
+    // "which" aquí es el botón, no el item
+})
+
+// ✅ BIEN - Guardar en variable
+final int[] selected = {0};
+.setSingleChoiceItems(items, 0, (d, which) -> {
+    selected[0] = which;
+})
+.setPositiveButton("OK", (d, w) -> {
+    String item = items[selected[0]]; // ✅
+})
+```
+
+---
+
+## 💡 CONSEJOS PROFESIONALES
+
+1. **Validaciones siempre en el botón Positivo**, no en el listener del EditText
+2. **Usa setCancelable(false)** para acciones críticas (eliminar, pagar)
+3. **No abuses de diálogos** → UX molesta si hay demasiados
+4. **Títulos concisos** → "Eliminar contacto" mejor que "¿Estás seguro de que quieres eliminar este contacto?"
+5. **Iconos opcionales** → `setIcon(R.drawable.ic_warning)` solo para alertas importantes
+6. **Texto de botones claro** → "Eliminar" mejor que "Aceptar" en confirmaciones de borrado
+
+---
+
+[🔝 Volver al índice](#-%C3%ADndice-general)
+
+---
+
+📌 **Guardado:** 06/03/2026 - 18:30h  
+📌 **Próxima sesión:** Día 11 - TimePickerDialog y DatePickerDialog
+
+---
+
+# 🎯 DÍA 11 - TimePickerDialog y DatePickerDialog
+
+**Fecha:** 9 de Marzo 2026  
+**Duración:** 2-3 horas  
+**Objetivos:** Dominar la selección de fechas y horas en Android
+
+---
+
+## 📖 1. Introducción a DatePicker y TimePicker
+
+Android proporciona diálogos especializados para seleccionar fechas y horas:
+
+|Diálogo|Propósito|Uso común|
+|---|---|---|
+|**TimePickerDialog**|Seleccionar hora (HH:mm)|Alarmas, recordatorios, citas|
+|**DatePickerDialog**|Seleccionar fecha (dd/MM/yyyy)|Reservas, cumpleaños, eventos|
+
+**Ventajas:**
+
+- ✅ Interfaz nativa de Android
+- ✅ Validación automática (no permite fechas inválidas)
+- ✅ Compatibilidad con diferentes versiones de Android
+- ✅ Fácil de implementar
+
+---
+
+## 📖 2. TimePickerDialog
+
+Permite seleccionar una hora (horas y minutos).
+
+### Sintaxis básica
+
+```java
+// Obtener hora actual
+Calendar calendario = Calendar.getInstance();
+int horaActual = calendario.get(Calendar.HOUR_OF_DAY);
+int minutoActual = calendario.get(Calendar.MINUTE);
+
+// Crear TimePickerDialog
+TimePickerDialog timePickerDialog = new TimePickerDialog(
+    this,                           // Contexto (Activity)
+    (view, hourOfDay, minute) -> {  // Listener cuando se selecciona
+        // hourOfDay = hora seleccionada (0-23)
+        // minute = minuto seleccionado (0-59)
+        String horaSeleccionada = String.format("%02d:%02d", hourOfDay, minute);
+        Toast.makeText(this, "Hora: " + horaSeleccionada, Toast.LENGTH_SHORT).show();
+    },
+    horaActual,    // Hora inicial mostrada
+    minutoActual,  // Minuto inicial mostrado
+    true           // true = formato 24h, false = formato AM/PM
+);
+
+timePickerDialog.show();
+```
+
+### Ejemplo completo
+
+```java
+public class MainActivity extends AppCompatActivity {
+    
+    private Button btnSeleccionarHora;
+    private TextView tvHora;
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        btnSeleccionarHora = findViewById(R.id.btnSeleccionarHora);
+        tvHora = findViewById(R.id.tvHora);
+        
+        btnSeleccionarHora.setOnClickListener(v -> mostrarTimePickerDialog());
+    }
+    
+    private void mostrarTimePickerDialog() {
+        // Obtener hora actual como predeterminada
+        Calendar c = Calendar.getInstance();
+        int hora = c.get(Calendar.HOUR_OF_DAY);
+        int minuto = c.get(Calendar.MINUTE);
+        
+        TimePickerDialog dialog = new TimePickerDialog(
+            this,
+            (view, selectedHour, selectedMinute) -> {
+                // Formatear con 2 dígitos (08:05 en vez de 8:5)
+                String horaFormateada = String.format("%02d:%02d", selectedHour, selectedMinute);
+                tvHora.setText("Hora seleccionada: " + horaFormateada);
+            },
+            hora,
+            minuto,
+            true  // Formato 24 horas
+        );
+        
+        dialog.show();
+    }
+}
+```
+
+### Formato 12 horas (AM/PM)
+
+```java
+TimePickerDialog dialog = new TimePickerDialog(
+    this,
+    (view, hourOfDay, minute) -> {
+        // Convertir a formato 12h
+        String periodo = (hourOfDay >= 12) ? "PM" : "AM";
+        int hora12 = (hourOfDay > 12) ? hourOfDay - 12 : hourOfDay;
+        if (hora12 == 0) hora12 = 12; // Medianoche = 12 AM
+        
+        String horaFormateada = String.format("%02d:%02d %s", hora12, minute, periodo);
+        tvHora.setText(horaFormateada);
+    },
+    12,
+    0,
+    false  // false = formato 12h con AM/PM
+);
+```
+
+---
+
+## 📖 3. DatePickerDialog
+
+Permite seleccionar una fecha (día, mes, año).
+
+### Sintaxis básica
+
+```java
+// Obtener fecha actual
+Calendar calendario = Calendar.getInstance();
+int anioActual = calendario.get(Calendar.YEAR);
+int mesActual = calendario.get(Calendar.MONTH);  // 0 = Enero, 11 = Diciembre
+int diaActual = calendario.get(Calendar.DAY_OF_MONTH);
+
+// Crear DatePickerDialog
+DatePickerDialog datePickerDialog = new DatePickerDialog(
+    this,                                // Contexto
+    (view, year, month, dayOfMonth) -> { // Listener
+        // year = año seleccionado
+        // month = mes (0-11, donde 0 = Enero)
+        // dayOfMonth = día seleccionado
+        String fechaSeleccionada = dayOfMonth + "/" + (month + 1) + "/" + year;
+        Toast.makeText(this, "Fecha: " + fechaSeleccionada, Toast.LENGTH_SHORT).show();
+    },
+    anioActual,  // Año inicial
+    mesActual,   // Mes inicial (0-11)
+    diaActual    // Día inicial
+);
+
+datePickerDialog.show();
+```
+
+### Ejemplo completo
+
+```java
+public class MainActivity extends AppCompatActivity {
+    
+    private Button btnSeleccionarFecha;
+    private TextView tvFecha;
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        btnSeleccionarFecha = findViewById(R.id.btnSeleccionarFecha);
+        tvFecha = findViewById(R.id.tvFecha);
+        
+        btnSeleccionarFecha.setOnClickListener(v -> mostrarDatePickerDialog());
+    }
+    
+    private void mostrarDatePickerDialog() {
+        Calendar c = Calendar.getInstance();
+        int anio = c.get(Calendar.YEAR);
+        int mes = c.get(Calendar.MONTH);
+        int dia = c.get(Calendar.DAY_OF_MONTH);
+        
+        DatePickerDialog dialog = new DatePickerDialog(
+            this,
+            (view, year, month, dayOfMonth) -> {
+                // ⚠️ IMPORTANTE: month va de 0 a 11, así que sumamos 1
+                String fechaFormateada = String.format("%02d/%02d/%d", 
+                    dayOfMonth, month + 1, year);
+                tvFecha.setText("Fecha: " + fechaFormateada);
+            },
+            anio,
+            mes,
+            dia
+        );
+        
+        dialog.show();
+    }
+}
+```
+
+---
+
+## 📖 4. Formatear Fecha y Hora
+
+### Con SimpleDateFormat
+
+```java
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+// Crear Calendar con fecha seleccionada
+Calendar c = Calendar.getInstance();
+c.set(2026, 2, 9);  // 9 de Marzo de 2026 (mes 2 = Marzo)
+
+// Formatear
+SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+String fechaFormateada = sdf.format(c.getTime());
+// Resultado: "09/03/2026"
+
+// Diferentes formatos
+SimpleDateFormat sdf1 = new SimpleDateFormat("EEEE, dd 'de' MMMM 'de' yyyy", new Locale("es", "ES"));
+// Resultado: "domingo, 09 de marzo de 2026"
+
+SimpleDateFormat sdf2 = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+// Resultado: "09-mar-2026"
+
+SimpleDateFormat sdf3 = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+// Resultado: "14:30:45"
+```
+
+### Patrones comunes
+
+|Patrón|Resultado|Ejemplo|
+|---|---|---|
+|`dd/MM/yyyy`|Día/Mes/Año|09/03/2026|
+|`yyyy-MM-dd`|Año-Mes-Día (ISO)|2026-03-09|
+|`EEEE, dd MMMM yyyy`|Día completo|domingo, 09 marzo 2026|
+|`HH:mm`|Hora 24h|14:30|
+|`hh:mm a`|Hora 12h|02:30 PM|
+
+---
+
+## 📖 5. Calendar - Obtener fecha actual
+
+```java
+import java.util.Calendar;
+
+Calendar c = Calendar.getInstance();
+
+// Obtener componentes
+int anio = c.get(Calendar.YEAR);              // 2026
+int mes = c.get(Calendar.MONTH);              // 2 (0=Enero, 11=Diciembre)
+int dia = c.get(Calendar.DAY_OF_MONTH);       // 9
+int hora = c.get(Calendar.HOUR_OF_DAY);       // 14 (formato 24h)
+int minuto = c.get(Calendar.MINUTE);          // 30
+int segundo = c.get(Calendar.SECOND);         // 45
+
+// Establecer fecha específica
+c.set(2026, 11, 25);  // 25 de Diciembre de 2026
+c.set(Calendar.HOUR_OF_DAY, 23);
+c.set(Calendar.MINUTE, 59);
+
+// Sumar/restar tiempo
+c.add(Calendar.DAY_OF_MONTH, 7);   // Sumar 7 días
+c.add(Calendar.MONTH, -1);          // Restar 1 mes
+c.add(Calendar.YEAR, 1);            // Sumar 1 año
+```
+
+---
+
+## 📖 6. Validaciones de Fechas
+
+### Limitar fecha mínima y máxima
+
+```java
+DatePickerDialog dialog = new DatePickerDialog(this, listener, anio, mes, dia);
+
+// Establecer fecha mínima (por ejemplo, solo fechas futuras)
+Calendar minDate = Calendar.getInstance();
+dialog.getDatePicker().setMinDate(minDate.getTimeInMillis());
+
+// Establecer fecha máxima (por ejemplo, hasta dentro de 1 año)
+Calendar maxDate = Calendar.getInstance();
+maxDate.add(Calendar.YEAR, 1);
+dialog.getDatePicker().setMaxDate(maxDate.getTimeInMillis());
+
+dialog.show();
+```
+
+### Validar que una fecha sea posterior a otra
+
+```java
+private boolean esFechaPosterior(Calendar fecha1, Calendar fecha2) {
+    return fecha1.after(fecha2);
+}
+
+// Uso:
+Calendar fechaInicio = Calendar.getInstance();
+fechaInicio.set(2026, 2, 9);
+
+Calendar fechaFin = Calendar.getInstance();
+fechaFin.set(2026, 2, 15);
+
+if (esFechaPosterior(fechaFin, fechaInicio)) {
+    Toast.makeText(this, "Fechas válidas", Toast.LENGTH_SHORT).show();
+} else {
+    Toast.makeText(this, "La fecha fin debe ser posterior", Toast.LENGTH_SHORT).show();
+}
+```
+
+### Calcular diferencia entre fechas
+
+```java
+private long calcularDiferenciaDias(Calendar fecha1, Calendar fecha2) {
+    long diferenciaMilisegundos = fecha2.getTimeInMillis() - fecha1.getTimeInMillis();
+    return diferenciaMilisegundos / (1000 * 60 * 60 * 24);
+}
+
+// Uso:
+long dias = calcularDiferenciaDias(fechaInicio, fechaFin);
+Toast.makeText(this, "Diferencia: " + dias + " días", Toast.LENGTH_SHORT).show();
+```
+
+---
+
+## 📖 7. DatePicker y TimePicker en XML (Vistas embebidas)
+
+A diferencia de los diálogos, puedes mostrar los controles directamente en el layout.
+
+### DatePicker en XML
+
+```xml
+<DatePicker
+    android:id="@+id/datePicker"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:calendarViewShown="false"
+    android:datePickerMode="spinner"/>
+```
+
+### TimePicker en XML
+
+```xml
+<TimePicker
+    android:id="@+id/timePicker"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:timePickerMode="spinner"/>
+```
+
+### Leer valores en Java
+
+```java
+DatePicker datePicker = findViewById(R.id.datePicker);
+TimePicker timePicker = findViewById(R.id.timePicker);
+
+// Obtener fecha del DatePicker
+int dia = datePicker.getDayOfMonth();
+int mes = datePicker.getMonth();  // 0-11
+int anio = datePicker.getYear();
+
+// Obtener hora del TimePicker
+int hora = timePicker.getHour();    // API 23+
+int minuto = timePicker.getMinute(); // API 23+
+
+// Para versiones anteriores a API 23:
+// int hora = timePicker.getCurrentHour();
+// int minuto = timePicker.getCurrentMinute();
+```
+
+---
+
+## 🎯 EJERCICIO 19: Agenda de Citas
+
+Crea una app de **Agenda de Citas Médicas** con las siguientes funcionalidades:
+
+**Requisitos:**
+
+1. **Botón "Nueva Cita"**: Abre diálogo con:
+    
+    - EditText para nombre del paciente
+    - Botón para seleccionar fecha (DatePickerDialog)
+    - Botón para seleccionar hora (TimePickerDialog)
+    - Botón "Guardar"
+2. **ListView** mostrando las citas guardadas con formato:
+    
+    ```
+    Juan Pérez
+    09/03/2026 - 14:30
+    ```
+    
+3. **Validaciones**:
+    
+    - Fecha no puede ser anterior a hoy
+    - Hora debe estar entre 08:00 y 20:00
+    - Nombre no puede estar vacío
+4. **Click en cita**: Mostrar AlertDialog con opciones:
+    
+    - Ver detalles
+    - Editar
+    - Eliminar
+
+**Clase sugerida:**
+
+```java
+public class Cita {
+    private String nombrePaciente;
+    private Calendar fechaHora;
+    
+    public Cita(String nombre, Calendar fechaHora) {
+        this.nombrePaciente = nombre;
+        this.fechaHora = fechaHora;
+    }
+    
+    // Getters y setters
+    
+    @Override
+    public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - HH:mm", Locale.getDefault());
+        return nombrePaciente + "\n" + sdf.format(fechaHora.getTime());
+    }
+}
+```
+
+**Layout sugerido:**
+
+```xml
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/btnNuevaCita"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nueva Cita"/>
+
+    <ListView
+        android:id="@+id/listViewCitas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="16dp"/>
+
+</LinearLayout>
+```
+
+---
+
+## 🎯 EJERCICIO 20: Recordatorios
+
+Crea una app de **Recordatorios** con las siguientes funcionalidades:
+
+**Requisitos:**
+
+1. **Formulario para crear recordatorio**:
+    
+    - EditText: Título
+    - EditText: Descripción
+    - TextView + Botón: Seleccionar fecha (DatePickerDialog)
+    - TextView + Botón: Seleccionar hora (TimePickerDialog)
+    - Spinner: Prioridad (Alta, Media, Baja)
+    - CheckBox: ¿Repetir diariamente?
+    - Botón "Guardar"
+2. **ListView** mostrando recordatorios ordenados por fecha
+    
+3. **Indicadores visuales**:
+    
+    - Color rojo para prioridad alta
+    - Color amarillo para prioridad media
+    - Color verde para prioridad baja
+    - Icono de repetición si es recurrente
+4. **Validaciones**:
+    
+    - Título obligatorio
+    - Fecha no puede ser en el pasado
+    - Si la fecha es hoy, la hora debe ser futura
+5. **Context Menu** en cada recordatorio:
+    
+    - Marcar como completado
+    - Editar
+    - Duplicar
+    - Eliminar
+
+**Clase sugerida:**
+
+```java
+public class Recordatorio {
+    private String titulo;
+    private String descripcion;
+    private Calendar fechaHora;
+    private String prioridad;  // "Alta", "Media", "Baja"
+    private boolean repetirDiariamente;
+    private boolean completado;
+    
+    // Constructor, getters y setters
+}
+```
+
+**Layout sugerido:**
+
+```xml
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/etTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Título del recordatorio"/>
+
+        <EditText
+            android:id="@+id/etDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descripción"
+            android:minLines="3"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvFecha"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Seleccionar fecha"
+                android:padding="12dp"/>
+
+            <Button
+                android:id="@+id/btnFecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📅"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvHora"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Seleccionar hora"
+                android:padding="12dp"/>
+
+            <Button
+                android:id="@+id/btnHora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🕐"/>
+
+        </LinearLayout>
+
+        <Spinner
+            android:id="@+id/spinnerPrioridad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/prioridades"/>
+
+        <CheckBox
+            android:id="@+id/cbRepetir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Repetir diariamente"/>
+
+        <Button
+            android:id="@+id/btnGuardar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar Recordatorio"/>
+
+        <ListView
+            android:id="@+id/listViewRecordatorios"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="16dp"/>
+
+    </LinearLayout>
+</ScrollView>
+```
+
+**res/values/arrays.xml:**
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="prioridades">
+        <item>Alta</item>
+        <item>Media</item>
+        <item>Baja</item>
+    </string-array>
+</resources>
+```
+
+---
+
+## 📝 CHECKLIST DÍA 11
+
+- [ ] Entiendes la diferencia entre TimePickerDialog y DatePickerDialog
+- [ ] Sabes obtener la fecha/hora actual con Calendar
+- [ ] Puedes formatear fechas con SimpleDateFormat
+- [ ] Sabes establecer límites min/max en DatePickerDialog
+- [ ] Puedes calcular diferencias entre fechas
+- [ ] Conoces la diferencia entre diálogos y vistas embebidas
+- [ ] Has completado Ejercicio 19
+- [ ] Has completado Ejercicio 20
+
+---
+
+## 🎓 CONCEPTOS CLAVE DEL DÍA 11
+
+|Concepto|Definición|
+|---|---|
+|**TimePickerDialog**|Diálogo para seleccionar hora (HH:mm)|
+|**DatePickerDialog**|Diálogo para seleccionar fecha (dd/MM/yyyy)|
+|**Calendar**|Clase para trabajar con fechas y horas|
+|**SimpleDateFormat**|Clase para formatear fechas como String|
+|**setMinDate()**|Establecer fecha mínima permitida|
+|**setMaxDate()**|Establecer fecha máxima permitida|
+|**Calendar.MONTH**|Mes (0-11, donde 0=Enero, 11=Diciembre)|
+|**Calendar.HOUR_OF_DAY**|Hora en formato 24h (0-23)|
+|**getTimeInMillis()**|Obtener timestamp en milisegundos|
+|**after() / before()**|Comparar si una fecha es posterior/anterior|
+
+---
+
+## 🔍 ERRORES COMUNES
+
+```java
+// ❌ ERROR 1: Olvidar que Calendar.MONTH va de 0 a 11
+Calendar c = Calendar.getInstance();
+c.set(2026, 3, 9);  // ❌ Esto es 9 de ABRIL, no Marzo
+// ✅ CORRECTO:
+c.set(2026, 2, 9);  // 9 de Marzo (mes 2)
+
+// ❌ ERROR 2: No sumar 1 al mostrar el mes
+String fecha = dia + "/" + mes + "/" + anio;  // ❌ Mostrará mes 0-11
+// ✅ CORRECTO:
+String fecha = dia + "/" + (mes + 1) + "/" + anio;
+
+// ❌ ERROR 3: No formatear con ceros a la izquierda
+String hora = hora + ":" + minuto;  // ❌ "8:5" en vez de "08:05"
+// ✅ CORRECTO:
+String hora = String.format("%02d:%02d", hora, minuto);
+
+// ❌ ERROR 4: Confundir HOUR con HOUR_OF_DAY
+int hora = c.get(Calendar.HOUR);  // ❌ Formato 12h (0-11)
+// ✅ CORRECTO:
+int hora = c.get(Calendar.HOUR_OF_DAY);  // Formato 24h (0-23)
+```
+
+---
+
+## 💡 CONSEJOS PROFESIONALES
+
+1. **Usa Calendar.getInstance()** para obtener la fecha actual, no `new Calendar()`
+2. **Siempre formatea con 2 dígitos** → `String.format("%02d/%02d/%d", dia, mes, anio)`
+3. **Recuerda: Calendar.MONTH va de 0 a 11** → siempre suma 1 al mostrar
+4. **Para validar fechas futuras** → `c.after(Calendar.getInstance())`
+5. **Usa SimpleDateFormat** para formateos complejos → `new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())`
+6. **Limita fechas razonables** → setMinDate() y setMaxDate() mejoran UX
+7. **Para apps profesionales** → considera usar **Material Date Picker** (más moderno)
+
+---
+
+## 🌟 EJEMPLO COMPLETO: Selector Fecha + Hora
+
+```java
+public class MainActivity extends AppCompatActivity {
+    
+    private TextView tvFechaHora;
+    private Button btnSeleccionar;
+    private Calendar fechaHoraSeleccionada;
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        tvFechaHora = findViewById(R.id.tvFechaHora);
+        btnSeleccionar = findViewById(R.id.btnSeleccionar);
+        
+        fechaHoraSeleccionada = Calendar.getInstance();
+        
+        btnSeleccionar.setOnClickListener(v -> seleccionarFecha());
+    }
+    
+    private void seleccionarFecha() {
+        Calendar c = Calendar.getInstance();
+        
+        DatePickerDialog dateDialog = new DatePickerDialog(
+            this,
+            (view, year, month, dayOfMonth) -> {
+                fechaHoraSeleccionada.set(Calendar.YEAR, year);
+                fechaHoraSeleccionada.set(Calendar.MONTH, month);
+                fechaHoraSeleccionada.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                
+                // Después de seleccionar fecha, seleccionar hora
+                seleccionarHora();
+            },
+            c.get(Calendar.YEAR),
+            c.get(Calendar.MONTH),
+            c.get(Calendar.DAY_OF_MONTH)
+        );
+        
+        // Solo fechas futuras
+        dateDialog.getDatePicker().setMinDate(c.getTimeInMillis());
+        dateDialog.show();
+    }
+    
+    private void seleccionarHora() {
+        Calendar c = Calendar.getInstance();
+        
+        TimePickerDialog timeDialog = new TimePickerDialog(
+            this,
+            (view, hourOfDay, minute) -> {
+                fechaHoraSeleccionada.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                fechaHoraSeleccionada.set(Calendar.MINUTE, minute);
+                
+                // Mostrar resultado
+                mostrarFechaHora();
+            },
+            c.get(Calendar.HOUR_OF_DAY),
+            c.get(Calendar.MINUTE),
+            true
+        );
+        
+        timeDialog.show();
+    }
+    
+    private void mostrarFechaHora() {
+        SimpleDateFormat sdf = new SimpleDateFormat(
+            "EEEE, dd 'de' MMMM 'de' yyyy - HH:mm", 
+            new Locale("es", "ES")
+        );
+        String texto = sdf.format(fechaHoraSeleccionada.getTime());
+        tvFechaHora.setText(texto);
+    }
+}
+```
+
+---
+
+[🔝 Volver al índice](#-%C3%ADndice-general)
+
+---
+
+📌 **Guardado:** 09/03/2026 - 17:00h  
+📌 **Próxima sesión:** Día 12 - Repaso Menús y Diálogos

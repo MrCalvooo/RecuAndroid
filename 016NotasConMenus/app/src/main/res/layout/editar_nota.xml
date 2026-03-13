@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/etTituloEditado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Titulo nuevo">
+    </EditText>
+
+    <EditText
+        android:id="@+id/etContenidoEditado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Contenido nuevo">
+    </EditText>
+
+    <CheckBox
+        android:id="@+id/ckFavEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Favorito"
+        android:focusableInTouchMode="false"
+        android:focusable="false">
+    </CheckBox>
+
+</LinearLayout>

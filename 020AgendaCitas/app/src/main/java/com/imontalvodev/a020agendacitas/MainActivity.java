@@ -1,6 +1,9 @@
 package com.imontalvodev.a020agendacitas;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +12,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ListView lv;
+    private Button btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +25,14 @@ public class MainActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        lv = findViewById(R.id.listViewCitas);
+        btn = findViewById(R.id.btnNuevaCita);
+
+        btn.setOnClickListener(view -> {
+            Intent intent = new Intent(this, NuevaCitaActivity.class);
+            startActivity(intent);
         });
     }
 }

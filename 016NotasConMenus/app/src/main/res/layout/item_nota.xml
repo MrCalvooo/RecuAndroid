@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10sp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20sp"
+        android:text="Titulo">
+    </TextView>
+
+    <TextView
+        android:id="@+id/txtContenido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20sp"
+        android:text="Contenido">
+    </TextView>
+
+    <TextView
+        android:id="@+id/txtFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20sp"
+        android:text="Fecha">
+    </TextView>
+
+    <CheckBox
+        android:id="@+id/ckFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Favorita"
+        android:layout_marginLeft="20sp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:clickable="false">
+    </CheckBox>
+
+</LinearLayout>

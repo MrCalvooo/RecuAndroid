@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "0613bda33837b6b9",
+        "id": "6fb1f4d5346cf747",
         "type": "tabs",
         "children": [
           {
-            "id": "fe2280ae9811b536",
+            "id": "9be202a829e63ef4",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -184,8 +184,9 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "fe2280ae9811b536",
+  "active": "9be202a829e63ef4",
   "lastOpenFiles": [
+    "Sin título.base",
     "Notas_Android.md"
   ]
 }
