@@ -43,7 +43,7 @@
 
 **[SEMANAS 9-10: MULTIMEDIA Y RECURSOS](#semanas-9-10-multimedia-y-recursos)**
 
-- Día 17 - MediaPlayer (Audio) _(Próximamente)_
+- [Día 17 - MediaPlayer (Audio)](#d%C3%ADa-17---mediaplayer-audio) ✅
 - Día 18 - VideoView _(Próximamente)_
 - Día 19 - SplashScreen _(Próximamente)_
 - Día 20 - Internacionalización _(Próximamente)_
@@ -181,6 +181,22 @@
 9. [Ejercicio 26: Galería de Imágenes](#ejercicio-26-galer%C3%ADa-de-im%C3%A1genes)
 10. [Checklist Día 15](#checklist-d%C3%ADa-15)
 11. [Conceptos Clave Día 15](#conceptos-clave-del-d%C3%ADa-15)
+
+---
+
+### 📖 ÍNDICE DETALLADO DEL DÍA 17
+
+1. [Introducción a MediaPlayer](#1-introducci%C3%B3n-a-mediaplayer)
+2. [Reproducir audio desde recursos](#2-reproducir-audio-desde-recursos-raw)
+3. [Reproducir audio desde almacenamiento](#3-reproducir-audio-desde-almacenamiento)
+4. [Controles básicos](#4-controles-b%C3%A1sicos-play-pause-stop)
+5. [SeekBar y progreso](#5-seekbar-y-progreso)
+6. [Estados del MediaPlayer](#6-estados-del-mediaplayer)
+7. [Listeners y eventos](#7-listeners-y-eventos)
+8. [Ejercicio 27: Reproductor de Audio](#ejercicio-27-reproductor-de-audio)
+9. [Ejercicio 28: Lista de Reproducción](#ejercicio-28-lista-de-reproducci%C3%B3n)
+10. [Checklist Día 17](#checklist-d%C3%ADa-17)
+11. [Conceptos Clave Día 17](#conceptos-clave-del-d%C3%ADa-17)
 
 ---
 
@@ -427,6 +443,7 @@ public class MainActivity extends AppCompatActivity {
 **💡 Pistas:**
 
 - Necesitarás una variable `int contador = 0;` como atributo de la clase
+    
 - En el onClick del primer botón:
     
     ```java
@@ -434,6 +451,7 @@ public class MainActivity extends AppCompatActivity {
     ```
     
 - En el onClick del segundo botón: resetea `contador` a 0 y actualiza el TextView
+    
 
 ---
 
@@ -541,6 +559,7 @@ public class MainActivity extends AppCompatActivity {
 **💡 Pistas:**
 
 - En el layout XML, dale un `android:id="@+id/layoutPrincipal"` al LinearLayout
+    
 - En Java:
     
     ```java
@@ -548,6 +567,7 @@ public class MainActivity extends AppCompatActivity {
     ```
     
 - Importar: `import android.graphics.Color;`
+    
 - Para color aleatorio:
     
     ```java
@@ -3027,7 +3047,7 @@ holder.btnComprar.setOnClickListener(v -> {
 
 ## 📖 3. Selección múltiple con CheckBox
 
-Mantener ArrayList\<Boolean> con estados:
+Mantener ArrayList<\Boolean> con estados:
 
 ```java
 private ArrayList<Boolean> seleccionados;
@@ -3311,6 +3331,7 @@ Un **AlertDialog** es una ventana emergente que interrumpe el flujo de la aplica
 ### ¿Cuándo usar AlertDialog?
 
 ✅ **SÍ usar para:**
+
 - Confirmaciones de eliminación
 - Advertencias importantes
 - Selección de opciones
@@ -3318,6 +3339,7 @@ Un **AlertDialog** es una ventana emergente que interrumpe el flujo de la aplica
 - Progreso de tareas
 
 ❌ **NO usar para:**
+
 - Mensajes informativos breves → usar **Toast**
 - Notificaciones del sistema → usar **Notification**
 - Selección de fecha/hora → usar **DatePickerDialog/TimePickerDialog**
@@ -3337,6 +3359,7 @@ new AlertDialog.Builder(this)
 ```
 
 **Explicación:**
+
 - `Builder(this)` → Constructor que necesita el contexto (Activity)
 - `setTitle()` → Título del diálogo
 - `setMessage()` → Contenido del mensaje
@@ -3369,13 +3392,14 @@ new AlertDialog.Builder(this)
 
 **Tipos de botones:**
 
-| Botón | Uso | Posición | Color |
-|-------|-----|----------|-------|
-| `setPositiveButton` | Acción principal (Aceptar, Sí, Guardar) | Derecha | Azul |
-| `setNegativeButton` | Cancelar, No | Izquierda | Gris |
-| `setNeutralButton` | Acción secundaria (Más info, Ayuda) | Centro | Gris |
+|Botón|Uso|Posición|Color|
+|---|---|---|---|
+|`setPositiveButton`|Acción principal (Aceptar, Sí, Guardar)|Derecha|Azul|
+|`setNegativeButton`|Cancelar, No|Izquierda|Gris|
+|`setNeutralButton`|Acción secundaria (Más info, Ayuda)|Centro|Gris|
 
 **Método `setCancelable()`:**
+
 - `true` (por defecto) → Se cierra al tocar fuera o pulsar BACK
 - `false` → Solo se cierra con los botones
 
@@ -3657,15 +3681,16 @@ Crea una app de **Gestión de Tareas** con las siguientes funcionalidades:
 1. **ListView** con tareas (String simple)
 2. **Botón "Añadir"**: AlertDialog con EditText para nueva tarea
 3. **Click en tarea**: AlertDialog con lista de acciones:
-   - Marcar como completada
-   - Editar
-   - Eliminar
-   - Cancelar
+    - Marcar como completada
+    - Editar
+    - Eliminar
+    - Cancelar
 4. **Al editar**: AlertDialog con EditText prellenado
 5. **Al eliminar**: AlertDialog de confirmación con botones Sí/No
 6. **Validaciones**: No permitir tareas vacías
 
 **Pistas:**
+
 - Usa `ArrayList<String>` para las tareas
 - `ArrayAdapter` para el ListView
 - `adapter.notifyDataSetChanged()` después de modificar
@@ -3712,6 +3737,7 @@ Crea una app de **Configuración de Perfil** con diálogos avanzados:
 7. Actualizar TextView al cambiar configuración
 
 **Datos a gestionar:**
+
 ```java
 private String nombre = "Usuario";
 private String tema = "Claro";
@@ -3787,18 +3813,18 @@ private ArrayList<String> notificaciones = new ArrayList<>();
 
 ## 🎓 CONCEPTOS CLAVE DEL DÍA 10
 
-| Concepto | Definición |
-|----------|------------|
-| **AlertDialog.Builder** | Patrón constructor para crear diálogos |
-| **setPositiveButton** | Botón de acción principal (derecha, azul) |
-| **setNegativeButton** | Botón de cancelar (izquierda, gris) |
-| **setNeutralButton** | Botón de acción alternativa (centro, gris) |
-| **setItems** | Lista de opciones sin selección previa |
-| **setSingleChoiceItems** | RadioButtons (una sola opción) |
-| **setMultiChoiceItems** | CheckBoxes (múltiples opciones) |
-| **setView** | Añadir vista personalizada (EditText, layout XML) |
-| **setCancelable** | Permitir/bloquear cierre al tocar fuera |
-| **show()** | OBLIGATORIO al final para mostrar el diálogo |
+|Concepto|Definición|
+|---|---|
+|**AlertDialog.Builder**|Patrón constructor para crear diálogos|
+|**setPositiveButton**|Botón de acción principal (derecha, azul)|
+|**setNegativeButton**|Botón de cancelar (izquierda, gris)|
+|**setNeutralButton**|Botón de acción alternativa (centro, gris)|
+|**setItems**|Lista de opciones sin selección previa|
+|**setSingleChoiceItems**|RadioButtons (una sola opción)|
+|**setMultiChoiceItems**|CheckBoxes (múltiples opciones)|
+|**setView**|Añadir vista personalizada (EditText, layout XML)|
+|**setCancelable**|Permitir/bloquear cierre al tocar fuera|
+|**show()**|OBLIGATORIO al final para mostrar el diálogo|
 
 ---
 
@@ -3871,12 +3897,13 @@ final int[] selected = {0};
 
 Android proporciona diálogos especializados para seleccionar fechas y horas:
 
-| Diálogo | Propósito | Uso común |
-|---------|-----------|-----------|
-| **TimePickerDialog** | Seleccionar hora (HH:mm) | Alarmas, recordatorios, citas |
-| **DatePickerDialog** | Seleccionar fecha (dd/MM/yyyy) | Reservas, cumpleaños, eventos |
+|Diálogo|Propósito|Uso común|
+|---|---|---|
+|**TimePickerDialog**|Seleccionar hora (HH:mm)|Alarmas, recordatorios, citas|
+|**DatePickerDialog**|Seleccionar fecha (dd/MM/yyyy)|Reservas, cumpleaños, eventos|
 
 **Ventajas:**
+
 - ✅ Interfaz nativa de Android
 - ✅ Validación automática (no permite fechas inválidas)
 - ✅ Compatibilidad con diferentes versiones de Android
@@ -4084,13 +4111,13 @@ SimpleDateFormat sdf3 = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
 
 ### Patrones comunes
 
-| Patrón | Resultado | Ejemplo |
-|--------|-----------|---------|
-| `dd/MM/yyyy` | Día/Mes/Año | 09/03/2026 |
-| `yyyy-MM-dd` | Año-Mes-Día (ISO) | 2026-03-09 |
-| `EEEE, dd MMMM yyyy` | Día completo | domingo, 09 marzo 2026 |
-| `HH:mm` | Hora 24h | 14:30 |
-| `hh:mm a` | Hora 12h | 02:30 PM |
+|Patrón|Resultado|Ejemplo|
+|---|---|---|
+|`dd/MM/yyyy`|Día/Mes/Año|09/03/2026|
+|`yyyy-MM-dd`|Año-Mes-Día (ISO)|2026-03-09|
+|`EEEE, dd MMMM yyyy`|Día completo|domingo, 09 marzo 2026|
+|`HH:mm`|Hora 24h|14:30|
+|`hh:mm a`|Hora 12h|02:30 PM|
 
 ---
 
@@ -4231,26 +4258,28 @@ Crea una app de **Agenda de Citas Médicas** con las siguientes funcionalidades:
 **Requisitos:**
 
 1. **Botón "Nueva Cita"**: Abre diálogo con:
-   - EditText para nombre del paciente
-   - Botón para seleccionar fecha (DatePickerDialog)
-   - Botón para seleccionar hora (TimePickerDialog)
-   - Botón "Guardar"
-
+    
+    - EditText para nombre del paciente
+    - Botón para seleccionar fecha (DatePickerDialog)
+    - Botón para seleccionar hora (TimePickerDialog)
+    - Botón "Guardar"
 2. **ListView** mostrando las citas guardadas con formato:
-   ```
-   Juan Pérez
-   09/03/2026 - 14:30
-   ```
-
+    
+    ```
+    Juan Pérez
+    09/03/2026 - 14:30
+    ```
+    
 3. **Validaciones**:
-   - Fecha no puede ser anterior a hoy
-   - Hora debe estar entre 08:00 y 20:00
-   - Nombre no puede estar vacío
-
+    
+    - Fecha no puede ser anterior a hoy
+    - Hora debe estar entre 08:00 y 20:00
+    - Nombre no puede estar vacío
 4. **Click en cita**: Mostrar AlertDialog con opciones:
-   - Ver detalles
-   - Editar
-   - Eliminar
+    
+    - Ver detalles
+    - Editar
+    - Eliminar
 
 **Clase sugerida:**
 
@@ -4308,32 +4337,33 @@ Crea una app de **Recordatorios** con las siguientes funcionalidades:
 **Requisitos:**
 
 1. **Formulario para crear recordatorio**:
-   - EditText: Título
-   - EditText: Descripción
-   - TextView + Botón: Seleccionar fecha (DatePickerDialog)
-   - TextView + Botón: Seleccionar hora (TimePickerDialog)
-   - Spinner: Prioridad (Alta, Media, Baja)
-   - CheckBox: ¿Repetir diariamente?
-   - Botón "Guardar"
-
+    
+    - EditText: Título
+    - EditText: Descripción
+    - TextView + Botón: Seleccionar fecha (DatePickerDialog)
+    - TextView + Botón: Seleccionar hora (TimePickerDialog)
+    - Spinner: Prioridad (Alta, Media, Baja)
+    - CheckBox: ¿Repetir diariamente?
+    - Botón "Guardar"
 2. **ListView** mostrando recordatorios ordenados por fecha
-
+    
 3. **Indicadores visuales**:
-   - Color rojo para prioridad alta
-   - Color amarillo para prioridad media
-   - Color verde para prioridad baja
-   - Icono de repetición si es recurrente
-
+    
+    - Color rojo para prioridad alta
+    - Color amarillo para prioridad media
+    - Color verde para prioridad baja
+    - Icono de repetición si es recurrente
 4. **Validaciones**:
-   - Título obligatorio
-   - Fecha no puede ser en el pasado
-   - Si la fecha es hoy, la hora debe ser futura
-
+    
+    - Título obligatorio
+    - Fecha no puede ser en el pasado
+    - Si la fecha es hoy, la hora debe ser futura
 5. **Context Menu** en cada recordatorio:
-   - Marcar como completado
-   - Editar
-   - Duplicar
-   - Eliminar
+    
+    - Marcar como completado
+    - Editar
+    - Duplicar
+    - Eliminar
 
 **Clase sugerida:**
 
@@ -4476,18 +4506,18 @@ public class Recordatorio {
 
 ## 🎓 CONCEPTOS CLAVE DEL DÍA 11
 
-| Concepto | Definición |
-|----------|------------|
-| **TimePickerDialog** | Diálogo para seleccionar hora (HH:mm) |
-| **DatePickerDialog** | Diálogo para seleccionar fecha (dd/MM/yyyy) |
-| **Calendar** | Clase para trabajar con fechas y horas |
-| **SimpleDateFormat** | Clase para formatear fechas como String |
-| **setMinDate()** | Establecer fecha mínima permitida |
-| **setMaxDate()** | Establecer fecha máxima permitida |
-| **Calendar.MONTH** | Mes (0-11, donde 0=Enero, 11=Diciembre) |
-| **Calendar.HOUR_OF_DAY** | Hora en formato 24h (0-23) |
-| **getTimeInMillis()** | Obtener timestamp en milisegundos |
-| **after() / before()** | Comparar si una fecha es posterior/anterior |
+|Concepto|Definición|
+|---|---|
+|**TimePickerDialog**|Diálogo para seleccionar hora (HH:mm)|
+|**DatePickerDialog**|Diálogo para seleccionar fecha (dd/MM/yyyy)|
+|**Calendar**|Clase para trabajar con fechas y horas|
+|**SimpleDateFormat**|Clase para formatear fechas como String|
+|**setMinDate()**|Establecer fecha mínima permitida|
+|**setMaxDate()**|Establecer fecha máxima permitida|
+|**Calendar.MONTH**|Mes (0-11, donde 0=Enero, 11=Diciembre)|
+|**Calendar.HOUR_OF_DAY**|Hora en formato 24h (0-23)|
+|**getTimeInMillis()**|Obtener timestamp en milisegundos|
+|**after() / before()**|Comparar si una fecha es posterior/anterior|
 
 ---
 
@@ -4639,6 +4669,7 @@ public class MainActivity extends AppCompatActivity {
 ### ¿Cuándo usar SharedPreferences?
 
 ✅ **SÍ usar para:**
+
 - Configuración de la app (tema, idioma, notificaciones)
 - Credenciales de sesión (recordar usuario)
 - Preferencias de usuario (primera vez, tutorial completado)
@@ -4646,6 +4677,7 @@ public class MainActivity extends AppCompatActivity {
 - Flags booleanos (mostrar ayuda, modo oscuro)
 
 ❌ **NO usar para:**
+
 - Grandes cantidades de datos → usar **Base de Datos SQLite**
 - Datos complejos (objetos, listas) → usar **Archivos JSON o BD**
 - Datos sensibles (contraseñas) → usar **EncryptedSharedPreferences**
@@ -4774,13 +4806,13 @@ public class MainActivity extends AppCompatActivity {
 
 SharedPreferences soporta **5 tipos de datos primitivos**:
 
-| Tipo | Método guardar | Método leer | Ejemplo |
-|------|---------------|-------------|---------|
-| **String** | `putString()` | `getString()` | `editor.putString("nombre", "Ana")` |
-| **int** | `putInt()` | `getInt()` | `editor.putInt("edad", 30)` |
-| **boolean** | `putBoolean()` | `getBoolean()` | `editor.putBoolean("activo", true)` |
-| **float** | `putFloat()` | `getFloat()` | `editor.putFloat("precio", 19.99f)` |
-| **long** | `putLong()` | `getLong()` | `editor.putLong("timestamp", 123456789L)` |
+|Tipo|Método guardar|Método leer|Ejemplo|
+|---|---|---|---|
+|**String**|`putString()`|`getString()`|`editor.putString("nombre", "Ana")`|
+|**int**|`putInt()`|`getInt()`|`editor.putInt("edad", 30)`|
+|**boolean**|`putBoolean()`|`getBoolean()`|`editor.putBoolean("activo", true)`|
+|**float**|`putFloat()`|`getFloat()`|`editor.putFloat("precio", 19.99f)`|
+|**long**|`putLong()`|`getLong()`|`editor.putLong("timestamp", 123456789L)`|
 
 ### ⚠️ NO soporta directamente:
 
@@ -4789,6 +4821,7 @@ SharedPreferences soporta **5 tipos de datos primitivos**:
 - ❌ HashMaps
 
 **Solución para datos complejos:**
+
 ```java
 // Guardar ArrayList como String (con separador)
 ArrayList<String> lista = new ArrayList<>(Arrays.asList("Rojo", "Verde", "Azul"));
@@ -4859,12 +4892,12 @@ Al obtener SharedPreferences, puedes especificar el **modo de acceso**:
 SharedPreferences prefs = getSharedPreferences("nombre", MODO);
 ```
 
-| Modo | Descripción | ¿Usar? |
-|------|-------------|--------|
-| `MODE_PRIVATE` | Solo esta app puede acceder | ✅ **SÍ** (recomendado) |
-| `MODE_WORLD_READABLE` | Otras apps pueden leer | ❌ **DEPRECADO** |
-| `MODE_WORLD_WRITEABLE` | Otras apps pueden escribir | ❌ **DEPRECADO** |
-| `MODE_MULTI_PROCESS` | Compartir entre procesos | ⚠️ Raramente necesario |
+|Modo|Descripción|¿Usar?|
+|---|---|---|
+|`MODE_PRIVATE`|Solo esta app puede acceder|✅ **SÍ** (recomendado)|
+|`MODE_WORLD_READABLE`|Otras apps pueden leer|❌ **DEPRECADO**|
+|`MODE_WORLD_WRITEABLE`|Otras apps pueden escribir|❌ **DEPRECADO**|
+|`MODE_MULTI_PROCESS`|Compartir entre procesos|⚠️ Raramente necesario|
 
 **Recomendación:** Usar siempre **`MODE_PRIVATE`**
 
@@ -4993,30 +5026,32 @@ Crea una app de **Login con Recordar Usuario** con las siguientes funcionalidade
 **Requisitos:**
 
 1. **LoginActivity** con:
-   - EditText: Usuario
-   - EditText: Contraseña (inputType="textPassword")
-   - CheckBox: "Recordar usuario"
-   - Button: "Iniciar Sesión"
-   
+    
+    - EditText: Usuario
+    - EditText: Contraseña (inputType="textPassword")
+    - CheckBox: "Recordar usuario"
+    - Button: "Iniciar Sesión"
 2. **Validaciones**:
-   - Usuario y contraseña no vacíos
-   - Usuario hardcodeado: "admin"
-   - Contraseña hardcodeada: "1234"
-
+    
+    - Usuario y contraseña no vacíos
+    - Usuario hardcodeado: "admin"
+    - Contraseña hardcodeada: "1234"
 3. **Funcionalidad**:
-   - Si CheckBox marcado → guardar usuario en SharedPreferences
-   - Si CheckBox NO marcado → eliminar usuario guardado
-   - Al abrir la app, si hay usuario guardado → prellenar el campo
-
+    
+    - Si CheckBox marcado → guardar usuario en SharedPreferences
+    - Si CheckBox NO marcado → eliminar usuario guardado
+    - Al abrir la app, si hay usuario guardado → prellenar el campo
 4. **MainActivity**:
-   - Mostrar "Bienvenido [usuario]"
-   - Botón "Cerrar Sesión" → volver a LoginActivity
-
+    
+    - Mostrar "Bienvenido [usuario]"
+    - Botón "Cerrar Sesión" → volver a LoginActivity
 5. **Control de sesión**:
-   - Si ya hay sesión activa → ir directo a MainActivity
-   - Al cerrar sesión → limpiar SharedPreferences
+    
+    - Si ya hay sesión activa → ir directo a MainActivity
+    - Al cerrar sesión → limpiar SharedPreferences
 
 **Pistas:**
+
 - Usar `getSharedPreferences("Login", MODE_PRIVATE)`
 - Guardar: `usuario_guardado`, `recordar`, `sesion_activa`
 - Usar `finish()` para cerrar Activities
@@ -5078,29 +5113,31 @@ Crea una app de **Configuración** que persista todas las preferencias del usuar
 **Requisitos:**
 
 1. **Pantalla de Configuración** con:
-   - EditText: Nombre de usuario
-   - Spinner: Tema (Claro, Oscuro, Automático)
-   - Spinner: Idioma (Español, English, Français)
-   - CheckBox: Notificaciones activadas
-   - CheckBox: Sonido activado
-   - SeekBar: Tamaño de fuente (10-30)
-   - Button: "Guardar Configuración"
-   - Button: "Restablecer por Defecto"
-
+    
+    - EditText: Nombre de usuario
+    - Spinner: Tema (Claro, Oscuro, Automático)
+    - Spinner: Idioma (Español, English, Français)
+    - CheckBox: Notificaciones activadas
+    - CheckBox: Sonido activado
+    - SeekBar: Tamaño de fuente (10-30)
+    - Button: "Guardar Configuración"
+    - Button: "Restablecer por Defecto"
 2. **Funcionalidad**:
-   - Al abrir la app → cargar configuración guardada
-   - Al pulsar "Guardar" → persistir en SharedPreferences
-   - Al pulsar "Restablecer" → volver a valores por defecto
-
+    
+    - Al abrir la app → cargar configuración guardada
+    - Al pulsar "Guardar" → persistir en SharedPreferences
+    - Al pulsar "Restablecer" → volver a valores por defecto
 3. **TextView dinámico**:
-   - Mostrar resumen de configuración actual
-   - Actualizar al cambiar cualquier opción
-
+    
+    - Mostrar resumen de configuración actual
+    - Actualizar al cambiar cualquier opción
 4. **Aplicar configuración**:
-   - Cambiar tamaño de fuente de TextView según SeekBar
-   - Mostrar Toast con tema seleccionado al guardar
+    
+    - Cambiar tamaño de fuente de TextView según SeekBar
+    - Mostrar Toast con tema seleccionado al guardar
 
 **Valores por defecto:**
+
 ```java
 String nombreDefault = "Usuario";
 String temaDefault = "Claro";
@@ -5282,19 +5319,19 @@ int fuenteDefault = 16;
 
 ## 🎓 CONCEPTOS CLAVE DEL DÍA 13
 
-| Concepto | Definición |
-|----------|------------|
-| **SharedPreferences** | Sistema de almacenamiento clave-valor persistente |
-| **getSharedPreferences()** | Obtener instancia de SharedPreferences |
-| **Editor** | Objeto para modificar SharedPreferences |
-| **putString/Int/Boolean()** | Guardar datos (String, int, boolean, float, long) |
-| **getString/Int/Boolean()** | Leer datos (con valor por defecto) |
-| **apply()** | Guardar cambios de forma asíncrona (recomendado) |
-| **commit()** | Guardar cambios de forma síncrona (retorna boolean) |
-| **remove()** | Eliminar una clave específica |
-| **clear()** | Eliminar TODAS las preferencias |
-| **contains()** | Verificar si existe una clave |
-| **MODE_PRIVATE** | Modo de acceso privado (recomendado) |
+|Concepto|Definición|
+|---|---|
+|**SharedPreferences**|Sistema de almacenamiento clave-valor persistente|
+|**getSharedPreferences()**|Obtener instancia de SharedPreferences|
+|**Editor**|Objeto para modificar SharedPreferences|
+|**putString/Int/Boolean()**|Guardar datos (String, int, boolean, float, long)|
+|**getString/Int/Boolean()**|Leer datos (con valor por defecto)|
+|**apply()**|Guardar cambios de forma asíncrona (recomendado)|
+|**commit()**|Guardar cambios de forma síncrona (retorna boolean)|
+|**remove()**|Eliminar una clave específica|
+|**clear()**|Eliminar TODAS las preferencias|
+|**contains()**|Verificar si existe una clave|
+|**MODE_PRIVATE**|Modo de acceso privado (recomendado)|
 
 ---
 
@@ -5340,47 +5377,52 @@ SharedPreferences prefs = getSharedPreferences("datos", MODE_PRIVATE);
 ## 💡 CONSEJOS PROFESIONALES
 
 1. **Usa nombres descriptivos para claves** → `"usuario_email"` mejor que `"ue"`
+    
 2. **Centraliza los nombres de claves** → evita errores de tipeo
-   ```java
-   public class PrefsKeys {
-       public static final String NOMBRE_USUARIO = "nombre_usuario";
-       public static final String TEMA = "tema_seleccionado";
-   }
-   ```
-
+    
+    ```java
+    public class PrefsKeys {
+        public static final String NOMBRE_USUARIO = "nombre_usuario";
+        public static final String TEMA = "tema_seleccionado";
+    }
+    ```
+    
 3. **apply() vs commit()**:
-   - `apply()` → Asíncrono, no bloquea, **recomendado**
-   - `commit()` → Síncrono, retorna true/false, usar solo si necesitas confirmación
-
+    
+    - `apply()` → Asíncrono, no bloquea, **recomendado**
+    - `commit()` → Síncrono, retorna true/false, usar solo si necesitas confirmación
 4. **Para datos sensibles** → usar `EncryptedSharedPreferences` (AndroidX Security)
-
+    
 5. **Organiza por contexto**:
-   ```java
-   // Login
-   SharedPreferences loginPrefs = getSharedPreferences("Login", MODE_PRIVATE);
-   
-   // Configuración
-   SharedPreferences configPrefs = getSharedPreferences("Config", MODE_PRIVATE);
-   ```
-
+    
+    ```java
+    // Login
+    SharedPreferences loginPrefs = getSharedPreferences("Login", MODE_PRIVATE);
+    
+    // Configuración
+    SharedPreferences configPrefs = getSharedPreferences("Config", MODE_PRIVATE);
+    ```
+    
 6. **Valores por defecto coherentes**:
-   ```java
-   boolean esVIP = prefs.getBoolean("es_vip", false);  // ✅ false por defecto
-   int puntos = prefs.getInt("puntos", 0);  // ✅ 0 por defecto
-   ```
-
+    
+    ```java
+    boolean esVIP = prefs.getBoolean("es_vip", false);  // ✅ false por defecto
+    int puntos = prefs.getInt("puntos", 0);  // ✅ 0 por defecto
+    ```
+    
 7. **Documenta tus preferencias** → comenta qué guarda cada clave
+    
 
 ---
 
 ## 🌟 COMPARATIVA: apply() vs commit()
 
-| Característica | apply() | commit() |
-|----------------|---------|----------|
-| **Ejecución** | Asíncrona (en segundo plano) | Síncrona (bloquea hasta guardar) |
-| **Retorno** | void | boolean (éxito/fallo) |
-| **Rendimiento** | ✅ Más rápido | ⚠️ Puede ralentizar |
-| **Cuándo usar** | 99% de los casos | Solo si necesitas saber si falló |
+|Característica|apply()|commit()|
+|---|---|---|
+|**Ejecución**|Asíncrona (en segundo plano)|Síncrona (bloquea hasta guardar)|
+|**Retorno**|void|boolean (éxito/fallo)|
+|**Rendimiento**|✅ Más rápido|⚠️ Puede ralentizar|
+|**Cuándo usar**|99% de los casos|Solo si necesitas saber si falló|
 
 ```java
 // Uso típico: apply()
@@ -5429,6 +5471,7 @@ Los **ficheros internos** permiten guardar datos más complejos que SharedPrefer
 ### ¿Cuándo usar Ficheros Internos?
 
 ✅ **SÍ usar para:**
+
 - Guardar texto largo (notas, documentos)
 - Datos estructurados en JSON
 - Logs de la aplicación
@@ -5437,6 +5480,7 @@ Los **ficheros internos** permiten guardar datos más complejos que SharedPrefer
 - Listas grandes de datos
 
 ❌ **NO usar para:**
+
 - Datos clave-valor simples → usar **SharedPreferences**
 - Datos relacionales complejos → usar **SQLite**
 - Archivos multimedia grandes → usar **almacenamiento externo**
@@ -5444,13 +5488,13 @@ Los **ficheros internos** permiten guardar datos más complejos que SharedPrefer
 
 ### Comparativa: SharedPreferences vs Ficheros Internos
 
-| Característica | SharedPreferences | Ficheros Internos |
-|----------------|-------------------|-------------------|
-| **Estructura** | Clave-valor (XML) | Cualquier formato (TXT, JSON) |
-| **Tamaño** | Datos pequeños | Datos medianos/grandes |
-| **Complejidad** | Datos simples | Datos complejos |
-| **Lectura** | Muy rápida | Depende del tamaño |
-| **Uso típico** | Configuración | Documentos, logs, JSON |
+|Característica|SharedPreferences|Ficheros Internos|
+|---|---|---|
+|**Estructura**|Clave-valor (XML)|Cualquier formato (TXT, JSON)|
+|**Tamaño**|Datos pequeños|Datos medianos/grandes|
+|**Complejidad**|Datos simples|Datos complejos|
+|**Lectura**|Muy rápida|Depende del tamaño|
+|**Uso típico**|Configuración|Documentos, logs, JSON|
 
 ---
 
@@ -5724,12 +5768,12 @@ Al usar `openFileOutput()`, puedes especificar el **modo de escritura**:
 FileOutputStream fos = openFileOutput(nombreArchivo, MODO);
 ```
 
-| Modo | Descripción | Uso |
-|------|-------------|-----|
-| `MODE_PRIVATE` | Sobrescribe el archivo existente | ✅ Por defecto |
-| `MODE_APPEND` | Añade al final del archivo | ✅ Para logs |
-| `MODE_WORLD_READABLE` | Otras apps pueden leer | ❌ DEPRECADO |
-| `MODE_WORLD_WRITEABLE` | Otras apps pueden escribir | ❌ DEPRECADO |
+|Modo|Descripción|Uso|
+|---|---|---|
+|`MODE_PRIVATE`|Sobrescribe el archivo existente|✅ Por defecto|
+|`MODE_APPEND`|Añade al final del archivo|✅ Para logs|
+|`MODE_WORLD_READABLE`|Otras apps pueden leer|❌ DEPRECADO|
+|`MODE_WORLD_WRITEABLE`|Otras apps pueden escribir|❌ DEPRECADO|
 
 ### Ejemplo: Sobrescribir vs Añadir
 
@@ -5936,33 +5980,35 @@ Crea una app de **Bloc de Notas** con persistencia en ficheros internos:
 **Requisitos:**
 
 1. **MainActivity** con:
-   - ListView mostrando lista de notas (solo títulos)
-   - FloatingActionButton "+" para crear nueva nota
-   - Click en nota → abrir NoteActivity para editar
-
+    
+    - ListView mostrando lista de notas (solo títulos)
+    - FloatingActionButton "+" para crear nueva nota
+    - Click en nota → abrir NoteActivity para editar
 2. **NoteActivity** con:
-   - EditText: Título
-   - EditText: Contenido (multilinea)
-   - Button: "Guardar"
-   - Button: "Eliminar" (solo si es nota existente)
-
+    
+    - EditText: Título
+    - EditText: Contenido (multilinea)
+    - Button: "Guardar"
+    - Button: "Eliminar" (solo si es nota existente)
 3. **Persistencia**:
-   - Cada nota se guarda en un archivo separado: `nota_[timestamp].txt`
-   - Formato del archivo:
-     ```
-     TITULO:::Título de la nota
-     CONTENIDO:::Contenido de la nota
-     FECHA:::1234567890
-     ```
-
+    
+    - Cada nota se guarda en un archivo separado: `nota_[timestamp].txt`
+    - Formato del archivo:
+        
+        ```
+        TITULO:::Título de la notaCONTENIDO:::Contenido de la notaFECHA:::1234567890
+        ```
+        
 4. **Funcionalidades**:
-   - Crear nueva nota
-   - Editar nota existente
-   - Eliminar nota (con confirmación)
-   - Listar todas las notas
-   - Mostrar fecha de última modificación
+    
+    - Crear nueva nota
+    - Editar nota existente
+    - Eliminar nota (con confirmación)
+    - Listar todas las notas
+    - Mostrar fecha de última modificación
 
 **Pistas:**
+
 - Usa `System.currentTimeMillis()` como ID único
 - Para listar notas, usa `getFilesDir().listFiles()`
 - Parsea el contenido línea por línea buscando ":::"
@@ -6071,40 +6117,32 @@ Crea una app de **Historial de Búsquedas** que guarde todas las búsquedas en u
 **Requisitos:**
 
 1. **Interfaz**:
-   - EditText: Campo de búsqueda
-   - Button: "Buscar"
-   - ListView: Historial de búsquedas (más recientes primero)
-   - Button: "Limpiar Historial"
-
+    
+    - EditText: Campo de búsqueda
+    - Button: "Buscar"
+    - ListView: Historial de búsquedas (más recientes primero)
+    - Button: "Limpiar Historial"
 2. **Funcionalidad**:
-   - Al buscar → guardar en historial con timestamp
-   - Mostrar fecha/hora de cada búsqueda
-   - Click en búsqueda → reutilizar en el campo
-   - Long click → eliminar esa búsqueda
-   - Límite de 50 búsquedas (eliminar las más antiguas)
-
+    
+    - Al buscar → guardar en historial con timestamp
+    - Mostrar fecha/hora de cada búsqueda
+    - Click en búsqueda → reutilizar en el campo
+    - Long click → eliminar esa búsqueda
+    - Límite de 50 búsquedas (eliminar las más antiguas)
 3. **Persistencia JSON**:
-   - Archivo: `historial.json`
-   - Estructura:
-     ```json
-     [
-       {
-         "texto": "Android Studio",
-         "fecha": 1234567890,
-         "resultados": 0
-       },
-       {
-         "texto": "Java tutorial",
-         "fecha": 1234567891,
-         "resultados": 0
-       }
-     ]
-     ```
-
+    
+    - Archivo: `historial.json`
+    - Estructura:
+        
+        ```json
+        [  {    "texto": "Android Studio",    "fecha": 1234567890,    "resultados": 0  },  {    "texto": "Java tutorial",    "fecha": 1234567891,    "resultados": 0  }]
+        ```
+        
 4. **Extras**:
-   - No repetir búsquedas (si ya existe, actualizar timestamp)
-   - Mostrar contador de veces buscado
-   - Exportar historial a archivo TXT legible
+    
+    - No repetir búsquedas (si ya existe, actualizar timestamp)
+    - Mostrar contador de veces buscado
+    - Exportar historial a archivo TXT legible
 
 **Clase sugerida:**
 
@@ -6242,20 +6280,20 @@ public class Busqueda {
 
 ## 🎓 CONCEPTOS CLAVE DEL DÍA 14
 
-| Concepto | Definición |
-|----------|------------|
-| **Ficheros Internos** | Archivos privados en `/data/data/[app]/files/` |
-| **openFileOutput()** | Crear/escribir archivo interno |
-| **openFileInput()** | Leer archivo interno |
-| **FileOutputStream** | Stream para escritura de bytes |
-| **FileInputStream** | Stream para lectura de bytes |
-| **BufferedReader** | Lector eficiente línea por línea |
-| **MODE_PRIVATE** | Sobrescribir archivo |
-| **MODE_APPEND** | Añadir al final del archivo |
-| **getFilesDir()** | Directorio de archivos internos |
-| **deleteFile()** | Eliminar archivo interno |
-| **JSONObject** | Objeto JSON (clave-valor) |
-| **JSONArray** | Array JSON (lista ordenada) |
+|Concepto|Definición|
+|---|---|
+|**Ficheros Internos**|Archivos privados en `/data/data/[app]/files/`|
+|**openFileOutput()**|Crear/escribir archivo interno|
+|**openFileInput()**|Leer archivo interno|
+|**FileOutputStream**|Stream para escritura de bytes|
+|**FileInputStream**|Stream para lectura de bytes|
+|**BufferedReader**|Lector eficiente línea por línea|
+|**MODE_PRIVATE**|Sobrescribir archivo|
+|**MODE_APPEND**|Añadir al final del archivo|
+|**getFilesDir()**|Directorio de archivos internos|
+|**deleteFile()**|Eliminar archivo interno|
+|**JSONObject**|Objeto JSON (clave-valor)|
+|**JSONArray**|Array JSON (lista ordenada)|
 
 ---
 
@@ -6312,63 +6350,70 @@ openFileOutput("log.txt", MODE_APPEND);  // ✅ Añade al final
 ## 💡 CONSEJOS PROFESIONALES
 
 1. **Siempre usa try-catch** → FileOperations lanzan IOException
-
+    
 2. **Cierra streams** → Usa try-with-resources (Java 7+):
-   ```java
-   try (FileOutputStream fos = openFileOutput("datos.txt", MODE_PRIVATE)) {
-       fos.write(contenido.getBytes());
-   } catch (IOException e) {
-       e.printStackTrace();
-   }
-   // Se cierra automáticamente
-   ```
-
+    
+    ```java
+    try (FileOutputStream fos = openFileOutput("datos.txt", MODE_PRIVATE)) {
+        fos.write(contenido.getBytes());
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    // Se cierra automáticamente
+    ```
+    
 3. **Nombres de archivo consistentes** → Define constantes:
-   ```java
-   private static final String ARCHIVO_NOTAS = "notas.json";
-   private static final String ARCHIVO_CONFIG = "config.txt";
-   ```
-
+    
+    ```java
+    private static final String ARCHIVO_NOTAS = "notas.json";
+    private static final String ARCHIVO_CONFIG = "config.txt";
+    ```
+    
 4. **Para logs** → Usa MODE_APPEND con timestamp:
-   ```java
-   String log = "[" + new Date() + "] " + mensaje + "\n";
-   fos.write(log.getBytes());
-   ```
-
+    
+    ```java
+    String log = "[" + new Date() + "] " + mensaje + "\n";
+    fos.write(log.getBytes());
+    ```
+    
 5. **JSON indentado** → Más legible:
-   ```java
-   jsonObject.toString(2);  // 2 espacios de indentación
-   ```
-
+    
+    ```java
+    jsonObject.toString(2);  // 2 espacios de indentación
+    ```
+    
 6. **Verificar espacio disponible**:
-   ```java
-   File directorio = getFilesDir();
-   long espacioLibre = directorio.getFreeSpace();
-   ```
-
+    
+    ```java
+    File directorio = getFilesDir();
+    long espacioLibre = directorio.getFreeSpace();
+    ```
+    
 7. **Gestión de errores clara**:
-   ```java
-   try {
-       // Código
-   } catch (FileNotFoundException e) {
-       Toast.makeText(this, "Archivo no encontrado", Toast.LENGTH_SHORT).show();
-   } catch (IOException e) {
-       Toast.makeText(this, "Error de lectura/escritura", Toast.LENGTH_SHORT).show();
-   }
-   ```
+    
+    ```java
+    try {
+        // Código
+    } catch (FileNotFoundException e) {
+        Toast.makeText(this, "Archivo no encontrado", Toast.LENGTH_SHORT).show();
+    } catch (IOException e) {
+        Toast.makeText(this, "Error de lectura/escritura", Toast.LENGTH_SHORT).show();
+    }
+    ```
+    
 
 ---
 
 ## 🌟 COMPARATIVA: SharedPreferences vs Ficheros vs SQLite
 
-| Característica | SharedPreferences | Ficheros Internos | SQLite |
-|----------------|-------------------|-------------------|---------|
-| **Estructura** | Clave-valor | Texto/JSON libre | Tablas relacionales |
-| **Complejidad** | ⭐ Muy simple | ⭐⭐ Moderada | ⭐⭐⭐ Compleja |
-| **Tamaño ideal** | < 1 KB | 1 KB - 10 MB | > 10 MB |
-| **Velocidad lectura** | ⚡⚡⚡ Muy rápido | ⚡⚡ Moderado | ⚡ Lento (pero optimizable) |
-| **Consultas** | ❌ No soporta | ❌ Leer todo | ✅ SQL avanzado |
-| **Uso típico** | Config, flags | Documentos, logs | Bases de datos |
+|Característica|SharedPreferences|Ficheros Internos|SQLite|
+|---|---|---|---|
+|**Estructura**|Clave-valor|Texto/JSON libre|Tablas relacionales|
+|**Complejidad**|⭐ Muy simple|⭐⭐ Moderada|⭐⭐⭐ Compleja|
+|**Tamaño ideal**|< 1 KB|1 KB - 10 MB|> 10 MB|
+|**Velocidad lectura**|⚡⚡⚡ Muy rápido|⚡⚡ Moderado|⚡ Lento (pero optimizable)|
+|**Consultas**|❌ No soporta|❌ Leer todo|✅ SQL avanzado|
+|**Uso típico**|Config, flags|Documentos, logs|Bases de datos|
 
 ---
 
@@ -6402,19 +6447,20 @@ El **almacenamiento externo** permite guardar archivos accesibles por el usuario
 
 ### Diferencias: Interno vs Externo
 
-| Característica | Almacenamiento Interno | Almacenamiento Externo |
-|----------------|------------------------|------------------------|
-| **Ubicación** | `/data/data/[app]/files/` | `/sdcard/` o tarjeta SD |
-| **Privacidad** | ✅ Solo la app | ❌ Accesible por otras apps |
-| **Permisos** | No requiere | ✅ Requiere permisos |
-| **Persistencia** | Se borra al desinstalar | Permanece al desinstalar |
-| **Visibilidad** | Oculto al usuario | Visible en explorador |
-| **Espacio** | Limitado | Normalmente mayor |
-| **Uso típico** | Datos privados, cache | Descargas, fotos, documentos |
+|Característica|Almacenamiento Interno|Almacenamiento Externo|
+|---|---|---|
+|**Ubicación**|`/data/data/[app]/files/`|`/sdcard/` o tarjeta SD|
+|**Privacidad**|✅ Solo la app|❌ Accesible por otras apps|
+|**Permisos**|No requiere|✅ Requiere permisos|
+|**Persistencia**|Se borra al desinstalar|Permanece al desinstalar|
+|**Visibilidad**|Oculto al usuario|Visible en explorador|
+|**Espacio**|Limitado|Normalmente mayor|
+|**Uso típico**|Datos privados, cache|Descargas, fotos, documentos|
 
 ### ¿Cuándo usar almacenamiento externo?
 
 ✅ **SÍ usar para:**
+
 - Archivos que el usuario debe poder ver (fotos, videos, documentos)
 - Archivos grandes (multimedia)
 - Exportar datos (backups, informes CSV/PDF)
@@ -6422,6 +6468,7 @@ El **almacenamiento externo** permite guardar archivos accesibles por el usuario
 - Descargas
 
 ❌ **NO usar para:**
+
 - Datos sensibles o privados → usar **almacenamiento interno**
 - Pequeñas configuraciones → usar **SharedPreferences**
 - Datos que deben borrarse con la app → usar **almacenamiento interno**
@@ -6723,9 +6770,9 @@ Desde **Android 10 (API 29)**, el acceso al almacenamiento externo cambió:
 
 - Las apps **NO** pueden acceder libremente a `/sdcard/`
 - Solo pueden acceder a:
-  - Su directorio privado: `getExternalFilesDir()`
-  - MediaStore (imágenes, videos, audio)
-  - Storage Access Framework (SAF)
+    - Su directorio privado: `getExternalFilesDir()`
+    - MediaStore (imágenes, videos, audio)
+    - Storage Access Framework (SAF)
 
 ### Soluciones
 
@@ -6779,30 +6826,31 @@ Crea una app de **Gestión de Contactos con Exportación** a CSV:
 **Requisitos:**
 
 1. **MainActivity** con:
-   - ListView de contactos (nombre, teléfono)
-   - FloatingActionButton "+" para añadir contacto
-   - Botón "Exportar a CSV"
-
+    
+    - ListView de contactos (nombre, teléfono)
+    - FloatingActionButton "+" para añadir contacto
+    - Botón "Exportar a CSV"
 2. **Funcionalidad de exportación**:
-   - Exportar todos los contactos a archivo CSV
-   - Guardar en carpeta Descargas
-   - Nombre: `contactos_[fecha].csv`
-   - Formato CSV:
-     ```csv
-     Nombre,Teléfono,Email
-     Juan Pérez,612345678,juan@email.com
-     María López,687654321,maria@email.com
-     ```
-
+    
+    - Exportar todos los contactos a archivo CSV
+    - Guardar en carpeta Descargas
+    - Nombre: `contactos_[fecha].csv`
+    - Formato CSV:
+        
+        ```csv
+        Nombre,Teléfono,EmailJuan Pérez,612345678,juan@email.comMaría López,687654321,maria@email.com
+        ```
+        
 3. **Gestión de permisos**:
-   - Solicitar permiso de escritura al exportar
-   - Mostrar diálogo si permiso denegado
-   - Verificar disponibilidad del almacenamiento
-
+    
+    - Solicitar permiso de escritura al exportar
+    - Mostrar diálogo si permiso denegado
+    - Verificar disponibilidad del almacenamiento
 4. **Extras**:
-   - Botón "Importar CSV" (leer archivo y cargar contactos)
-   - Mostrar diálogo de confirmación antes de exportar
-   - Abrir el archivo CSV después de exportar (Intent)
+    
+    - Botón "Importar CSV" (leer archivo y cargar contactos)
+    - Mostrar diálogo de confirmación antes de exportar
+    - Abrir el archivo CSV después de exportar (Intent)
 
 **Clase sugerida:**
 
@@ -6835,6 +6883,7 @@ public class Contacto {
 ```
 
 **Pistas:**
+
 - Usa `SimpleDateFormat` para el nombre del archivo
 - Recuerda añadir cabecera CSV
 - Usa `ActivityCompat.requestPermissions()` para permisos
@@ -6849,49 +6898,55 @@ Crea una app de **Galería Simple** que muestre imágenes del almacenamiento ext
 **Requisitos:**
 
 1. **MainActivity** con:
-   - GridView mostrando miniaturas de imágenes
-   - Cada imagen con nombre del archivo
-
+    
+    - GridView mostrando miniaturas de imágenes
+    - Cada imagen con nombre del archivo
 2. **Funcionalidad**:
-   - Listar todas las imágenes de la carpeta Pictures
-   - Mostrar miniaturas (usar BitmapFactory con inSampleSize)
-   - Click en imagen → abrir en pantalla completa
-
+    
+    - Listar todas las imágenes de la carpeta Pictures
+    - Mostrar miniaturas (usar BitmapFactory con inSampleSize)
+    - Click en imagen → abrir en pantalla completa
 3. **ImageViewActivity** (pantalla completa):
-   - ImageView con la imagen
-   - Botones: "Compartir", "Eliminar", "Volver"
-
+    
+    - ImageView con la imagen
+    - Botones: "Compartir", "Eliminar", "Volver"
 4. **Gestión de permisos**:
-   - Solicitar permiso de lectura al iniciar
-   - Si no hay permiso, mostrar mensaje
-
+    
+    - Solicitar permiso de lectura al iniciar
+    - Si no hay permiso, mostrar mensaje
 5. **Extras**:
-   - Botón "Tomar Foto" (abrir cámara)
-   - Filtrar por extensión (.jpg, .png)
-   - Ordenar por fecha (más recientes primero)
-   - Implementar caché de miniaturas
+    
+    - Botón "Tomar Foto" (abrir cámara)
+    - Filtrar por extensión (.jpg, .png)
+    - Ordenar por fecha (más recientes primero)
+    - Implementar caché de miniaturas
 
 **Pistas:**
+
 - Para listar imágenes:
-  ```java
-  File directorio = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-  File[] archivos = directorio.listFiles();
-  ```
-
+    
+    ```java
+    File directorio = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+    File[] archivos = directorio.listFiles();
+    ```
+    
 - Para crear miniatura eficiente:
-  ```java
-  BitmapFactory.Options options = new BitmapFactory.Options();
-  options.inSampleSize = 4;  // Reducir a 1/4 del tamaño
-  Bitmap bitmap = BitmapFactory.decodeFile(archivo.getAbsolutePath(), options);
-  ```
-
+    
+    ```java
+    BitmapFactory.Options options = new BitmapFactory.Options();
+    options.inSampleSize = 4;  // Reducir a 1/4 del tamaño
+    Bitmap bitmap = BitmapFactory.decodeFile(archivo.getAbsolutePath(), options);
+    ```
+    
 - Para compartir imagen:
-  ```java
-  Intent shareIntent = new Intent(Intent.ACTION_SEND);
-  shareIntent.setType("image/*");
-  shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(archivo));
-  startActivity(Intent.createChooser(shareIntent, "Compartir imagen"));
-  ```
+    
+    ```java
+    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+    shareIntent.setType("image/*");
+    shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(archivo));
+    startActivity(Intent.createChooser(shareIntent, "Compartir imagen"));
+    ```
+    
 
 **Layout sugerido (activity_main.xml):**
 
@@ -6941,18 +6996,18 @@ Crea una app de **Galería Simple** que muestre imágenes del almacenamiento ext
 
 ## 🎓 CONCEPTOS CLAVE DEL DÍA 15
 
-| Concepto | Definición |
-|----------|------------|
-| **Almacenamiento Externo** | Espacio accesible por usuario y apps, tarjeta SD |
-| **WRITE_EXTERNAL_STORAGE** | Permiso para escribir en almacenamiento externo |
-| **READ_EXTERNAL_STORAGE** | Permiso para leer almacenamiento externo |
-| **getExternalFilesDir()** | Directorio privado de la app en almacenamiento externo |
-| **Environment.DIRECTORY_DOWNLOADS** | Carpeta Descargas pública |
-| **Environment.getExternalStorageState()** | Verificar disponibilidad del almacenamiento |
-| **isExternalStorageWritable()** | Verificar si se puede escribir |
-| **Scoped Storage** | Restricción de acceso desde Android 10 |
-| **MediaStore** | API para acceder a multimedia en Android 10+ |
-| **requestPermissions()** | Solicitar permisos en tiempo de ejecución |
+|Concepto|Definición|
+|---|---|
+|**Almacenamiento Externo**|Espacio accesible por usuario y apps, tarjeta SD|
+|**WRITE_EXTERNAL_STORAGE**|Permiso para escribir en almacenamiento externo|
+|**READ_EXTERNAL_STORAGE**|Permiso para leer almacenamiento externo|
+|**getExternalFilesDir()**|Directorio privado de la app en almacenamiento externo|
+|**Environment.DIRECTORY_DOWNLOADS**|Carpeta Descargas pública|
+|**Environment.getExternalStorageState()**|Verificar disponibilidad del almacenamiento|
+|**isExternalStorageWritable()**|Verificar si se puede escribir|
+|**Scoped Storage**|Restricción de acceso desde Android 10|
+|**MediaStore**|API para acceder a multimedia en Android 10+|
+|**requestPermissions()**|Solicitar permisos en tiempo de ejecución|
 
 ---
 
@@ -7005,64 +7060,71 @@ if (!directorio.exists()) {
 ## 💡 CONSEJOS PROFESIONALES
 
 1. **Prioriza almacenamiento privado** → Usa `getExternalFilesDir()` siempre que sea posible
-
+    
 2. **Verifica permisos ANTES de cada operación**:
-   ```java
-   if (ContextCompat.checkSelfPermission(...) != PackageManager.PERMISSION_GRANTED) {
-       // Solicitar permiso
-       return;
-   }
-   ```
-
+    
+    ```java
+    if (ContextCompat.checkSelfPermission(...) != PackageManager.PERMISSION_GRANTED) {
+        // Solicitar permiso
+        return;
+    }
+    ```
+    
 3. **Nombres únicos con timestamp**:
-   ```java
-   String nombre = "backup_" + System.currentTimeMillis() + ".json";
-   ```
-
+    
+    ```java
+    String nombre = "backup_" + System.currentTimeMillis() + ".json";
+    ```
+    
 4. **Usa try-catch específicos**:
-   ```java
-   try {
-       // ...
-   } catch (FileNotFoundException e) {
-       Toast.makeText(this, "Archivo no encontrado", Toast.LENGTH_SHORT).show();
-   } catch (SecurityException e) {
-       Toast.makeText(this, "Sin permisos", Toast.LENGTH_SHORT).show();
-   } catch (IOException e) {
-       Toast.makeText(this, "Error E/S", Toast.LENGTH_SHORT).show();
-   }
-   ```
-
+    
+    ```java
+    try {
+        // ...
+    } catch (FileNotFoundException e) {
+        Toast.makeText(this, "Archivo no encontrado", Toast.LENGTH_SHORT).show();
+    } catch (SecurityException e) {
+        Toast.makeText(this, "Sin permisos", Toast.LENGTH_SHORT).show();
+    } catch (IOException e) {
+        Toast.makeText(this, "Error E/S", Toast.LENGTH_SHORT).show();
+    }
+    ```
+    
 5. **Para Android 10+**, considera:
-   - Usar `getExternalFilesDir()` (no requiere permisos)
-   - MediaStore para multimedia
-   - Storage Access Framework para documentos
-
+    
+    - Usar `getExternalFilesDir()` (no requiere permisos)
+    - MediaStore para multimedia
+    - Storage Access Framework para documentos
 6. **Informar al usuario** sobre ubicación del archivo:
-   ```java
-   Toast.makeText(this, "Guardado en: " + archivo.getAbsolutePath(), Toast.LENGTH_LONG).show();
-   ```
-
+    
+    ```java
+    Toast.makeText(this, "Guardado en: " + archivo.getAbsolutePath(), Toast.LENGTH_LONG).show();
+    ```
+    
 7. **Para exportar, usa Intent para abrir**:
-   ```java
-   Intent intent = new Intent(Intent.ACTION_VIEW);
-   intent.setDataAndType(Uri.fromFile(archivo), "text/csv");
-   startActivity(intent);
-   ```
+    
+    ```java
+    Intent intent = new Intent(Intent.ACTION_VIEW);
+    intent.setDataAndType(Uri.fromFile(archivo), "text/csv");
+    startActivity(intent);
+    ```
+    
 
 ---
 
 ## 🌟 COMPARATIVA: Interno vs Externo
 
-| Aspecto | Interno | Externo Privado | Externo Público |
-|---------|---------|-----------------|-----------------|
-| **Ubicación** | `/data/data/[app]/` | `/sdcard/Android/data/[app]/` | `/sdcard/Downloads/` etc. |
-| **Permisos** | ❌ No requiere | ⚠️ No requiere (Android 4.4+) | ✅ Sí requiere |
-| **Visibilidad** | Oculto | Oculto para usuario | ✅ Visible |
-| **Persistencia** | Se borra | Se borra | Permanece |
-| **Espacio** | Limitado | Mayor | Mayor |
-| **Uso típico** | Datos privados | Cache grande | Descargas, exports |
+|Aspecto|Interno|Externo Privado|Externo Público|
+|---|---|---|---|
+|**Ubicación**|`/data/data/[app]/`|`/sdcard/Android/data/[app]/`|`/sdcard/Downloads/` etc.|
+|**Permisos**|❌ No requiere|⚠️ No requiere (Android 4.4+)|✅ Sí requiere|
+|**Visibilidad**|Oculto|Oculto para usuario|✅ Visible|
+|**Persistencia**|Se borra|Se borra|Permanece|
+|**Espacio**|Limitado|Mayor|Mayor|
+|**Uso típico**|Datos privados|Cache grande|Descargas, exports|
 
 **Recomendación general:**
+
 1. **Datos privados** → Almacenamiento interno
 2. **Cache/temp grande** → Externo privado (`getExternalFilesDir()`)
 3. **Archivos para usuario** → Externo público (con permisos)
@@ -7074,4 +7136,880 @@ if (!directorio.exists()) {
 ---
 
 📌 **Guardado:** 16/03/2026 - 18:00h  
-📌 **Próxima sesión:** Día 16 - Repaso Persistencia de Datos
+📌 **Próxima sesión:** Día 17 - MediaPlayer (Audio)
+
+---
+
+# 🎯 DÍA 17 - MediaPlayer (Audio)
+
+**Fecha:** 18 de Marzo 2026  
+**Duración:** 2-3 horas  
+**Objetivos:** Dominar la reproducción de audio con MediaPlayer
+
+---
+
+## 📖 1. Introducción a MediaPlayer
+
+**MediaPlayer** es la clase de Android para reproducir archivos de audio y video.
+
+### ¿Qué es MediaPlayer?
+
+- Clase nativa de Android para reproducir multimedia
+- Soporta formatos: MP3, WAV, AAC, OGG, FLAC, etc.
+- Puede reproducir desde:
+    - Recursos de la app (`res/raw/`)
+    - Almacenamiento interno/externo
+    - URLs de internet
+    - Assets
+
+### Características principales
+
+✅ Reproducción, pausa, stop ✅ Control de volumen ✅ Avance/retroceso (seek) ✅ Modo bucle (loop) ✅ Eventos (inicio, finalización, errores)
+
+---
+
+## 📖 2. Reproducir audio desde recursos (raw)
+
+### Preparación
+
+1. Crea la carpeta `res/raw/` (si no existe)
+2. Añade archivos de audio (por ejemplo: `cancion.mp3`)
+
+### Código básico
+
+```java
+public class MainActivity extends AppCompatActivity {
+    
+    private MediaPlayer mediaPlayer;
+    private Button btnPlay, btnPause, btnStop;
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        btnPlay = findViewById(R.id.btnPlay);
+        btnPause = findViewById(R.id.btnPause);
+        btnStop = findViewById(R.id.btnStop);
+        
+        // Crear MediaPlayer desde recurso raw
+        mediaPlayer = MediaPlayer.create(this, R.raw.cancion);
+        
+        btnPlay.setOnClickListener(v -> reproducir());
+        btnPause.setOnClickListener(v -> pausar());
+        btnStop.setOnClickListener(v -> detener());
+    }
+    
+    private void reproducir() {
+        if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
+            mediaPlayer.start();
+            Toast.makeText(this, "▶ Reproduciendo", Toast.LENGTH_SHORT).show();
+        }
+    }
+    
+    private void pausar() {
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+            Toast.makeText(this, "⏸ Pausado", Toast.LENGTH_SHORT).show();
+        }
+    }
+    
+    private void detener() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.prepareAsync(); // Preparar para reproducir de nuevo
+            Toast.makeText(this, "⏹ Detenido", Toast.LENGTH_SHORT).show();
+        }
+    }
+    
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();  // ⚠️ IMPORTANTE: liberar recursos
+            mediaPlayer = null;
+        }
+    }
+}
+```
+
+---
+
+## 📖 3. Reproducir audio desde almacenamiento
+
+### Desde almacenamiento interno
+
+```java
+private void reproducirDesdeInterno() {
+    try {
+        File archivo = new File(getFilesDir(), "audio.mp3");
+        
+        if (!archivo.exists()) {
+            Toast.makeText(this, "Archivo no encontrado", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
+        // Liberar MediaPlayer anterior si existe
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+        }
+        
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setDataSource(archivo.getAbsolutePath());
+        mediaPlayer.prepare();  // Preparación síncrona
+        mediaPlayer.start();
+        
+        Toast.makeText(this, "Reproduciendo desde interno", Toast.LENGTH_SHORT).show();
+        
+    } catch (IOException e) {
+        e.printStackTrace();
+        Toast.makeText(this, "Error al reproducir", Toast.LENGTH_SHORT).show();
+    }
+}
+```
+
+### Desde almacenamiento externo
+
+```java
+private void reproducirDesdeExterno() {
+    // Verificar permiso
+    if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED) {
+        Toast.makeText(this, "Sin permiso de lectura", Toast.LENGTH_SHORT).show();
+        return;
+    }
+    
+    try {
+        File directorio = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
+        File archivo = new File(directorio, "cancion.mp3");
+        
+        if (!archivo.exists()) {
+            Toast.makeText(this, "Archivo no encontrado", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+        }
+        
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setDataSource(archivo.getAbsolutePath());
+        mediaPlayer.prepare();
+        mediaPlayer.start();
+        
+    } catch (IOException e) {
+        e.printStackTrace();
+        Toast.makeText(this, "Error al reproducir", Toast.LENGTH_SHORT).show();
+    }
+}
+```
+
+### Desde URL (internet)
+
+```java
+private void reproducirDesdeURL() {
+    String url = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+    
+    try {
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+        }
+        
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setDataSource(url);
+        
+        // Preparación ASÍNCRONA (recomendado para URLs)
+        mediaPlayer.prepareAsync();
+        
+        mediaPlayer.setOnPreparedListener(mp -> {
+            mp.start();
+            Toast.makeText(this, "Reproduciendo desde internet", Toast.LENGTH_SHORT).show();
+        });
+        
+        mediaPlayer.setOnErrorListener((mp, what, extra) -> {
+            Toast.makeText(this, "Error al cargar audio", Toast.LENGTH_SHORT).show();
+            return true;
+        });
+        
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+```
+
+---
+
+## 📖 4. Controles básicos (Play, Pause, Stop)
+
+### Métodos principales
+
+```java
+// ▶ PLAY / REANUDAR
+mediaPlayer.start();
+
+// ⏸ PAUSAR
+mediaPlayer.pause();
+
+// ⏹ DETENER (necesita preparar de nuevo)
+mediaPlayer.stop();
+mediaPlayer.prepare();  // o prepareAsync()
+
+// ⏮ REINICIAR (volver al inicio)
+mediaPlayer.seekTo(0);
+mediaPlayer.start();
+
+// 🔁 MODO BUCLE
+mediaPlayer.setLooping(true);  // Repetir indefinidamente
+
+// 🔊 VOLUMEN (0.0 a 1.0)
+mediaPlayer.setVolume(0.5f, 0.5f);  // (izquierdo, derecho)
+```
+
+### Ejemplo completo con estados
+
+```java
+private void togglePlayPause() {
+    if (mediaPlayer == null) {
+        Toast.makeText(this, "No hay audio cargado", Toast.LENGTH_SHORT).show();
+        return;
+    }
+    
+    if (mediaPlayer.isPlaying()) {
+        mediaPlayer.pause();
+        btnPlayPause.setText("▶ Play");
+    } else {
+        mediaPlayer.start();
+        btnPlayPause.setText("⏸ Pause");
+    }
+}
+
+private void reiniciar() {
+    if (mediaPlayer != null) {
+        mediaPlayer.seekTo(0);
+        mediaPlayer.start();
+    }
+}
+
+private void adelantar10Segundos() {
+    if (mediaPlayer != null) {
+        int posicionActual = mediaPlayer.getCurrentPosition();
+        int nuevaPosicion = posicionActual + 10000;  // +10 segundos
+        int duracion = mediaPlayer.getDuration();
+        
+        if (nuevaPosicion < duracion) {
+            mediaPlayer.seekTo(nuevaPosicion);
+        } else {
+            mediaPlayer.seekTo(duracion);
+        }
+    }
+}
+
+private void retroceder10Segundos() {
+    if (mediaPlayer != null) {
+        int posicionActual = mediaPlayer.getCurrentPosition();
+        int nuevaPosicion = posicionActual - 10000;  // -10 segundos
+        
+        if (nuevaPosicion > 0) {
+            mediaPlayer.seekTo(nuevaPosicion);
+        } else {
+            mediaPlayer.seekTo(0);
+        }
+    }
+}
+```
+
+---
+
+## 📖 5. SeekBar y progreso
+
+Mostrar el progreso de reproducción con un SeekBar.
+
+```java
+private SeekBar seekBar;
+private TextView tvTiempoActual, tvDuracionTotal;
+private Handler handler = new Handler();
+private Runnable updateSeekBar;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    
+    seekBar = findViewById(R.id.seekBar);
+    tvTiempoActual = findViewById(R.id.tvTiempoActual);
+    tvDuracionTotal = findViewById(R.id.tvDuracionTotal);
+    
+    mediaPlayer = MediaPlayer.create(this, R.raw.cancion);
+    
+    // Configurar SeekBar
+    configurarSeekBar();
+}
+
+private void configurarSeekBar() {
+    int duracion = mediaPlayer.getDuration();
+    seekBar.setMax(duracion);
+    
+    // Mostrar duración total
+    tvDuracionTotal.setText(formatearTiempo(duracion));
+    
+    // Listener para cuando el usuario arrastra el SeekBar
+    seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            if (fromUser) {
+                mediaPlayer.seekTo(progress);
+            }
+        }
+        
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {}
+        
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {}
+    });
+    
+    // Actualizar SeekBar continuamente
+    updateSeekBar = new Runnable() {
+        @Override
+        public void run() {
+            if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+                int posicionActual = mediaPlayer.getCurrentPosition();
+                seekBar.setProgress(posicionActual);
+                tvTiempoActual.setText(formatearTiempo(posicionActual));
+            }
+            handler.postDelayed(this, 100);  // Actualizar cada 100ms
+        }
+    };
+    
+    handler.post(updateSeekBar);
+}
+
+private String formatearTiempo(int milisegundos) {
+    int segundos = (milisegundos / 1000) % 60;
+    int minutos = (milisegundos / 1000) / 60;
+    return String.format("%02d:%02d", minutos, segundos);
+}
+
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    handler.removeCallbacks(updateSeekBar);
+    if (mediaPlayer != null) {
+        mediaPlayer.release();
+        mediaPlayer = null;
+    }
+}
+```
+
+---
+
+## 📖 6. Estados del MediaPlayer
+
+MediaPlayer tiene diferentes estados que debes gestionar correctamente:
+
+```
+    ┌─────────────┐
+    │    IDLE     │ ← Estado inicial
+    └──────┬──────┘
+           │ setDataSource()
+    ┌──────▼──────┐
+    │ INITIALIZED │
+    └──────┬──────┘
+           │ prepare() / prepareAsync()
+    ┌──────▼──────┐
+    │  PREPARED   │
+    └──────┬──────┘
+           │ start()
+    ┌──────▼──────┐
+    │  STARTED    │ ← Reproduciendo
+    └──────┬──────┘
+           │ pause()
+    ┌──────▼──────┐
+    │   PAUSED    │
+    └──────┬──────┘
+           │ stop()
+    ┌──────▼──────┐
+    │  STOPPED    │
+    └──────┬──────┘
+           │ release()
+    ┌──────▼──────┐
+    │     END     │
+    └─────────────┘
+```
+
+### Buenas prácticas
+
+```java
+// ✅ CORRECTO: Verificar estado antes de operar
+if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+    mediaPlayer.pause();
+}
+
+// ❌ MAL: No verificar
+mediaPlayer.pause();  // Puede lanzar IllegalStateException
+
+// ✅ CORRECTO: Liberar recursos
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    if (mediaPlayer != null) {
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+        }
+        mediaPlayer.release();
+        mediaPlayer = null;
+    }
+}
+```
+
+---
+
+## 📖 7. Listeners y eventos
+
+### OnCompletionListener (cuando termina)
+
+```java
+mediaPlayer.setOnCompletionListener(mp -> {
+    Toast.makeText(this, "🎵 Canción finalizada", Toast.LENGTH_SHORT).show();
+    btnPlayPause.setText("▶ Play");
+    seekBar.setProgress(0);
+});
+```
+
+### OnErrorListener (errores)
+
+```java
+mediaPlayer.setOnErrorListener((mp, what, extra) -> {
+    String error = "Error desconocido";
+    
+    if (what == MediaPlayer.MEDIA_ERROR_SERVER_DIED) {
+        error = "Error del servidor";
+    } else if (what == MediaPlayer.MEDIA_ERROR_UNKNOWN) {
+        error = "Error desconocido";
+    }
+    
+    Toast.makeText(this, "❌ " + error, Toast.LENGTH_SHORT).show();
+    return true;  // true = error manejado
+});
+```
+
+### OnPreparedListener (para prepareAsync)
+
+```java
+mediaPlayer.setOnPreparedListener(mp -> {
+    Toast.makeText(this, "✅ Audio listo", Toast.LENGTH_SHORT).show();
+    mp.start();
+});
+```
+
+### OnSeekCompleteListener
+
+```java
+mediaPlayer.setOnSeekCompleteListener(mp -> {
+    Toast.makeText(this, "Posición actualizada", Toast.LENGTH_SHORT).show();
+});
+```
+
+---
+
+## 🎯 EJERCICIO 27: Reproductor de Audio
+
+Crea un **Reproductor de Audio Simple** con controles completos:
+
+**Requisitos:**
+
+1. **Interfaz**:
+    
+    - ImageView: Carátula del álbum
+    - TextView: Título de la canción
+    - TextView: Artista
+    - SeekBar: Barra de progreso
+    - TextView: Tiempo actual (00:00)
+    - TextView: Duración total (00:00)
+    - Botones: Anterior | Play/Pause | Siguiente
+    - Botones: -10s | +10s
+    - Button: Modo shuffle
+    - Button: Modo repeat
+2. **Funcionalidad**:
+    
+    - Reproducir audio desde `res/raw/`
+    - Play/Pause con mismo botón
+    - Actualizar SeekBar en tiempo real
+    - Arrastrar SeekBar para cambiar posición
+    - Adelantar/retroceder 10 segundos
+    - Siguiente/anterior canción (mínimo 3 canciones)
+3. **Modos especiales**:
+    
+    - Shuffle: reproducción aleatoria
+    - Repeat: repetir canción actual
+    - Auto-play: al terminar, reproducir siguiente
+4. **Extras**:
+    
+    - Notificación con controles de reproducción
+    - Servicio en segundo plano
+    - Persistir estado con SharedPreferences
+
+**Layout sugerido:**
+
+```xml
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <!-- Carátula -->
+    <ImageView
+        android:id="@+id/ivCaratula"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/album_placeholder"
+        android:scaleType="centerCrop"/>
+
+    <!-- Info canción -->
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Título de la canción"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="24dp"/>
+
+    <TextView
+        android:id="@+id/tvArtista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Artista"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_marginTop="4dp"/>
+
+    <!-- SeekBar -->
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"/>
+
+    <!-- Tiempos -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvTiempoActual"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="00:00"
+            android:gravity="start"/>
+
+        <TextView
+            android:id="@+id/tvDuracionTotal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="00:00"
+            android:gravity="end"/>
+
+    </LinearLayout>
+
+    <!-- Controles principales -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="24dp">
+
+        <Button
+            android:id="@+id/btnAnterior"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:text="⏮"/>
+
+        <Button
+            android:id="@+id/btnPlayPause"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="▶"
+            android:textSize="24sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
+
+        <Button
+            android:id="@+id/btnSiguiente"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:text="⏭"/>
+
+    </LinearLayout>
+
+    <!-- Controles secundarios -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/btnMenos10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-10s"/>
+
+        <Button
+            android:id="@+id/btnShuffle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🔀"
+            android:layout_marginStart="8dp"/>
+
+        <Button
+            android:id="@+id/btnRepeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🔁"
+            android:layout_marginStart="8dp"/>
+
+        <Button
+            android:id="@+id/btnMas10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+10s"
+            android:layout_marginStart="8dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+```
+
+---
+
+## 🎯 EJERCICIO 28: Lista de Reproducción
+
+Crea una app de **Lista de Reproducción** con múltiples canciones:
+
+**Requisitos:**
+
+1. **ListView** con canciones (título, artista, duración)
+    
+2. **Funcionalidad**:
+    
+    - Click en canción → reproducir
+    - Canción actual resaltada en la lista
+    - Controles en parte inferior de la pantalla
+    - Auto-avanzar a siguiente al terminar
+3. **Datos de canciones**:
+    
+    - Clase `Cancion` con: título, artista, archivo, duración
+    - ArrayList\<Cancion> con mínimo 5 canciones
+    - Guardar lista en JSON (fichero interno)
+4. **Extras**:
+    
+    - Crear playlist personalizada
+    - Eliminar canción de playlist
+    - Ordenar por: título, artista, duración
+    - Buscar canciones
+
+**Clase sugerida:**
+
+```java
+public class Cancion {
+    private String titulo;
+    private String artista;
+    private int recursoAudio;  // R.raw.cancion1
+    private int duracion;      // en milisegundos
+    
+    public Cancion(String titulo, String artista, int recursoAudio) {
+        this.titulo = titulo;
+        this.artista = artista;
+        this.recursoAudio = recursoAudio;
+    }
+    
+    @Override
+    public String toString() {
+        return titulo + "\n" + artista;
+    }
+    
+    // Getters y setters
+}
+```
+
+---
+
+## 📝 CHECKLIST DÍA 17
+
+- [ ] Entiendes qué es MediaPlayer y sus usos
+- [ ] Sabes crear MediaPlayer desde recursos raw
+- [ ] Puedes reproducir audio desde almacenamiento
+- [ ] Conoces los controles básicos (play, pause, stop, seek)
+- [ ] Sabes implementar SeekBar con progreso en tiempo real
+- [ ] Entiendes los estados del MediaPlayer
+- [ ] Puedes usar listeners (OnCompletion, OnError, OnPrepared)
+- [ ] Sabes liberar recursos con release()
+- [ ] Has completado Ejercicio 27
+- [ ] Has completado Ejercicio 28
+
+---
+
+## 🎓 CONCEPTOS CLAVE DEL DÍA 17
+
+|Concepto|Definición|
+|---|---|
+|**MediaPlayer**|Clase para reproducir audio y video|
+|**MediaPlayer.create()**|Crear y preparar MediaPlayer desde recurso|
+|**start()**|Iniciar/reanudar reproducción|
+|**pause()**|Pausar reproducción|
+|**stop()**|Detener reproducción completamente|
+|**seekTo()**|Ir a posición específica (milisegundos)|
+|**getCurrentPosition()**|Obtener posición actual|
+|**getDuration()**|Obtener duración total|
+|**isPlaying()**|Verificar si está reproduciendo|
+|**setLooping()**|Activar/desactivar modo bucle|
+|**release()**|Liberar recursos (OBLIGATORIO)|
+|**prepareAsync()**|Preparación asíncrona (para URLs)|
+|**setOnCompletionListener()**|Evento al terminar|
+
+---
+
+## 🔍 ERRORES COMUNES
+
+```java
+// ❌ ERROR 1: No liberar recursos
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    // ❌ Olvidar release() causa memory leak
+}
+
+// ✅ CORRECTO:
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    if (mediaPlayer != null) {
+        mediaPlayer.release();
+        mediaPlayer = null;
+    }
+}
+
+// ❌ ERROR 2: Llamar métodos sin verificar estado
+mediaPlayer.pause();  // ❌ IllegalStateException si no está playing
+
+// ✅ CORRECTO:
+if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+    mediaPlayer.pause();
+}
+
+// ❌ ERROR 3: Usar prepare() con URLs
+mediaPlayer.setDataSource(url);
+mediaPlayer.prepare();  // ❌ Bloquea UI thread
+
+// ✅ CORRECTO: prepareAsync para URLs
+mediaPlayer.setDataSource(url);
+mediaPlayer.prepareAsync();
+mediaPlayer.setOnPreparedListener(mp -> mp.start());
+
+// ❌ ERROR 4: No detener Handler en onDestroy
+// El Handler sigue actualizando UI aunque Activity esté destruida
+
+// ✅ CORRECTO:
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    handler.removeCallbacks(updateSeekBar);
+}
+
+// ❌ ERROR 5: Reutilizar MediaPlayer sin reset
+mediaPlayer.setDataSource(nuevaCancion);  // ❌ IllegalStateException
+
+// ✅ CORRECTO:
+mediaPlayer.reset();
+mediaPlayer.setDataSource(nuevaCancion);
+mediaPlayer.prepare();
+```
+
+---
+
+## 💡 CONSEJOS PROFESIONALES
+
+1. **Siempre libera recursos**:
+    
+    ```java
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
+    ```
+    
+2. **Para URLs, usa prepareAsync**:
+    
+    ```java
+    mediaPlayer.prepareAsync();  // No bloquea
+    mediaPlayer.setOnPreparedListener(mp -> mp.start());
+    ```
+    
+3. **Pausar en onPause()** para mejor UX:
+    
+    ```java
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+            estabaPausado = true;
+        }
+    }
+    ```
+    
+4. **Gestionar errores**:
+    
+    ```java
+    mediaPlayer.setOnErrorListener((mp, what, extra) -> {
+        Log.e("MediaPlayer", "Error: " + what);
+        return true;
+    });
+    ```
+    
+5. **Para reproducción en segundo plano**, usa un **Service**
+    
+6. **Formato de tiempo legible**:
+    
+    ```java
+    private String formatearTiempo(int ms) {
+        return String.format("%02d:%02d", 
+            (ms / 1000) / 60,  // minutos
+            (ms / 1000) % 60); // segundos
+    }
+    ```
+    
+7. **Evitar memory leaks** con Handler:
+    
+    ```java
+    private static class MiHandler extends Handler {
+        private final WeakReference<MainActivity> activityRef;
+        
+        MiHandler(MainActivity activity) {
+            this.activityRef = new WeakReference<>(activity);
+        }
+    }
+    ```
+    
+
+---
+
+[🔝 Volver al índice](#-%C3%ADndice-general)
+
+---
+
+📌 **Guardado:** 18/03/2026 - 17:00h  
+📌 **Próxima sesión:** Día 18 - VideoView
