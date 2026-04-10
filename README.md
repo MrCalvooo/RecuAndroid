@@ -44,7 +44,7 @@
 **[SEMANAS 9-10: MULTIMEDIA Y RECURSOS](#semanas-9-10-multimedia-y-recursos)**
 
 - [Día 17 - MediaPlayer (Audio)](#d%C3%ADa-17---mediaplayer-audio) ✅
-- Día 18 - VideoView _(Próximamente)_
+- [Día 18 - VideoView](#d%C3%ADa-18---videoview) ✅
 - Día 19 - SplashScreen _(Próximamente)_
 - Día 20 - Internacionalización _(Próximamente)_
 
@@ -197,6 +197,22 @@
 9. [Ejercicio 28: Lista de Reproducción](#ejercicio-28-lista-de-reproducci%C3%B3n)
 10. [Checklist Día 17](#checklist-d%C3%ADa-17)
 11. [Conceptos Clave Día 17](#conceptos-clave-del-d%C3%ADa-17)
+
+---
+
+### 📖 ÍNDICE DETALLADO DEL DÍA 18
+
+1. [Introducción a VideoView](#1-introducci%C3%B3n-a-videoview)
+2. [Reproducir video desde recursos](#2-reproducir-video-desde-recursos)
+3. [Reproducir video desde almacenamiento](#3-reproducir-video-desde-almacenamiento)
+4. [MediaController](#4-mediacontroller)
+5. [Controles personalizados](#5-controles-personalizados)
+6. [Orientación y pantalla completa](#6-orientaci%C3%B3n-y-pantalla-completa)
+7. [VideoView vs MediaPlayer](#7-videoview-vs-mediaplayer-para-video)
+8. [Ejercicio 29: Reproductor de Video](#ejercicio-29-reproductor-de-video)
+9. [Ejercicio 30: Galería de Videos](#ejercicio-30-galer%C3%ADa-de-videos)
+10. [Checklist Día 18](#checklist-d%C3%ADa-18)
+11. [Conceptos Clave Día 18](#conceptos-clave-del-d%C3%ADa-18)
 
 ---
 
@@ -3047,7 +3063,7 @@ holder.btnComprar.setOnClickListener(v -> {
 
 ## 📖 3. Selección múltiple con CheckBox
 
-Mantener ArrayList<\Boolean> con estados:
+Mantener ArrayList\<Boolean> con estados:
 
 ```java
 private ArrayList<Boolean> seleccionados;
@@ -7808,7 +7824,7 @@ Crea una app de **Lista de Reproducción** con múltiples canciones:
 3. **Datos de canciones**:
     
     - Clase `Cancion` con: título, artista, archivo, duración
-    - ArrayList\<Cancion> con mínimo 5 canciones
+    - ArrayList<Cancion> con mínimo 5 canciones
     - Guardar lista en JSON (fichero interno)
 4. **Extras**:
     
@@ -8013,3 +8029,800 @@ mediaPlayer.prepare();
 
 📌 **Guardado:** 18/03/2026 - 17:00h  
 📌 **Próxima sesión:** Día 18 - VideoView
+
+---
+
+# 🎯 DÍA 18 - VideoView
+
+**Fecha:** 20 de Marzo 2026  
+**Duración:** 2-3 horas  
+**Objetivos:** Dominar la reproducción de video con VideoView y MediaController
+
+---
+
+## 📖 1. Introducción a VideoView
+
+**VideoView** es un componente de Android especializado en reproducir videos.
+
+### ¿Qué es VideoView?
+
+- Widget para mostrar y reproducir videos
+- Basado internamente en **MediaPlayer** y **SurfaceView**
+- Más simple que usar MediaPlayer directamente para video
+- Soporta formatos: MP4, 3GP, WebM, MKV
+
+### Características
+
+✅ Reproducción de video simple ✅ Controles integrados con MediaController ✅ Reproducción desde recursos, almacenamiento, URLs ✅ Ajuste automático de aspecto ✅ Eventos de reproducción
+
+### VideoView vs MediaPlayer
+
+|Característica|VideoView|MediaPlayer + SurfaceView|
+|---|---|---|
+|**Complejidad**|⭐ Simple|⭐⭐⭐ Complejo|
+|**Código**|Pocas líneas|Mucho código|
+|**Flexibilidad**|Limitada|Total control|
+|**Controles**|MediaController integrado|Personalizados|
+|**Uso típico**|Videos simples|Reproductores avanzados|
+
+---
+
+## 📖 2. Reproducir video desde recursos
+
+### Preparación
+
+1. Crea carpeta `res/raw/` (si no existe)
+2. Añade archivo de video (ej: `video.mp4`)
+
+### Layout XML
+
+```xml
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>
+```
+
+### Código básico
+
+```java
+public class MainActivity extends AppCompatActivity {
+    
+    private VideoView videoView;
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        videoView = findViewById(R.id.videoView);
+        
+        // URI del video en recursos raw
+        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.video;
+        Uri uri = Uri.parse(videoPath);
+        
+        videoView.setVideoURI(uri);
+        videoView.start();
+    }
+}
+```
+
+### Con listener de preparación
+
+```java
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    
+    videoView = findViewById(R.id.videoView);
+    
+    String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.video;
+    Uri uri = Uri.parse(videoPath);
+    
+    videoView.setVideoURI(uri);
+    
+    // Listener cuando el video está listo
+    videoView.setOnPreparedListener(mp -> {
+        Toast.makeText(this, "Video listo para reproducir", Toast.LENGTH_SHORT).show();
+        videoView.start();
+    });
+    
+    // Listener cuando termina
+    videoView.setOnCompletionListener(mp -> {
+        Toast.makeText(this, "Video finalizado", Toast.LENGTH_SHORT).show();
+    });
+    
+    // Listener de errores
+    videoView.setOnErrorListener((mp, what, extra) -> {
+        Toast.makeText(this, "Error al reproducir video", Toast.LENGTH_SHORT).show();
+        return true;
+    });
+}
+```
+
+---
+
+## 📖 3. Reproducir video desde almacenamiento
+
+### Desde almacenamiento interno
+
+```java
+private void reproducirDesdeInterno() {
+    File archivo = new File(getFilesDir(), "video.mp4");
+    
+    if (!archivo.exists()) {
+        Toast.makeText(this, "Video no encontrado", Toast.LENGTH_SHORT).show();
+        return;
+    }
+    
+    Uri uri = Uri.fromFile(archivo);
+    videoView.setVideoURI(uri);
+    videoView.start();
+}
+```
+
+### Desde almacenamiento externo
+
+```java
+private void reproducirDesdeExterno() {
+    // Verificar permiso
+    if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED) {
+        Toast.makeText(this, "Sin permiso de lectura", Toast.LENGTH_SHORT).show();
+        return;
+    }
+    
+    File directorio = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
+    File archivo = new File(directorio, "video.mp4");
+    
+    if (!archivo.exists()) {
+        Toast.makeText(this, "Video no encontrado", Toast.LENGTH_SHORT).show();
+        return;
+    }
+    
+    Uri uri = Uri.fromFile(archivo);
+    videoView.setVideoURI(uri);
+    videoView.start();
+}
+```
+
+### Desde URL (internet)
+
+```java
+private void reproducirDesdeURL() {
+    String url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+    
+    Uri uri = Uri.parse(url);
+    videoView.setVideoURI(uri);
+    
+    videoView.setOnPreparedListener(mp -> {
+        Toast.makeText(this, "Reproduciendo desde internet", Toast.LENGTH_SHORT).show();
+        videoView.start();
+    });
+    
+    videoView.setOnErrorListener((mp, what, extra) -> {
+        Toast.makeText(this, "Error al cargar video", Toast.LENGTH_SHORT).show();
+        return true;
+    });
+}
+```
+
+---
+
+## 📖 4. MediaController
+
+**MediaController** proporciona controles de reproducción (play, pause, seek).
+
+### Implementación básica
+
+```java
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    
+    videoView = findViewById(R.id.videoView);
+    
+    // Configurar MediaController
+    MediaController mediaController = new MediaController(this);
+    mediaController.setAnchorView(videoView);
+    videoView.setMediaController(mediaController);
+    
+    // Cargar video
+    String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.video;
+    Uri uri = Uri.parse(videoPath);
+    videoView.setVideoURI(uri);
+    
+    videoView.setOnPreparedListener(mp -> {
+        videoView.start();
+    });
+}
+```
+
+### MediaController personalizado
+
+```java
+private void configurarMediaController() {
+    MediaController mediaController = new MediaController(this) {
+        @Override
+        public void show(int timeout) {
+            super.show(0);  // 0 = mostrar indefinidamente
+        }
+    };
+    
+    mediaController.setAnchorView(videoView);
+    videoView.setMediaController(mediaController);
+}
+```
+
+---
+
+## 📖 5. Controles personalizados
+
+Crear botones propios en lugar de MediaController.
+
+```java
+public class MainActivity extends AppCompatActivity {
+    
+    private VideoView videoView;
+    private Button btnPlay, btnPause, btnStop;
+    private SeekBar seekBar;
+    private TextView tvTiempo;
+    private Handler handler = new Handler();
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        videoView = findViewById(R.id.videoView);
+        btnPlay = findViewById(R.id.btnPlay);
+        btnPause = findViewById(R.id.btnPause);
+        btnStop = findViewById(R.id.btnStop);
+        seekBar = findViewById(R.id.seekBar);
+        tvTiempo = findViewById(R.id.tvTiempo);
+        
+        cargarVideo();
+        configurarControles();
+    }
+    
+    private void cargarVideo() {
+        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.video;
+        Uri uri = Uri.parse(videoPath);
+        videoView.setVideoURI(uri);
+        
+        videoView.setOnPreparedListener(mp -> {
+            seekBar.setMax(videoView.getDuration());
+            actualizarSeekBar();
+        });
+    }
+    
+    private void configurarControles() {
+        btnPlay.setOnClickListener(v -> {
+            if (!videoView.isPlaying()) {
+                videoView.start();
+            }
+        });
+        
+        btnPause.setOnClickListener(v -> {
+            if (videoView.isPlaying()) {
+                videoView.pause();
+            }
+        });
+        
+        btnStop.setOnClickListener(v -> {
+            videoView.stopPlayback();
+            videoView.resume();  // Resetear
+        });
+        
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (fromUser) {
+                    videoView.seekTo(progress);
+                }
+            }
+            
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+            
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+    }
+    
+    private void actualizarSeekBar() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (videoView.isPlaying()) {
+                    int posicion = videoView.getCurrentPosition();
+                    seekBar.setProgress(posicion);
+                    tvTiempo.setText(formatearTiempo(posicion) + " / " + 
+                                    formatearTiempo(videoView.getDuration()));
+                    handler.postDelayed(this, 100);
+                }
+            }
+        }, 100);
+    }
+    
+    private String formatearTiempo(int milisegundos) {
+        int segundos = (milisegundos / 1000) % 60;
+        int minutos = (milisegundos / 1000) / 60;
+        return String.format("%02d:%02d", minutos, segundos);
+    }
+    
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
+    }
+}
+```
+
+**Layout sugerido:**
+
+```xml
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/controlsLayout"/>
+
+    <LinearLayout
+        android:id="@+id/controlsLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#80000000"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/tvTiempo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="00:00 / 00:00"
+            android:textColor="#ffffff"
+            android:gravity="center"/>
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▶"/>
+
+            <Button
+                android:id="@+id/btnPause"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⏸"
+                android:layout_marginStart="8dp"/>
+
+            <Button
+                android:id="@+id/btnStop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⏹"
+                android:layout_marginStart="8dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
+```
+
+---
+
+## 📖 6. Orientación y pantalla completa
+
+### Cambiar a pantalla completa
+
+```java
+private void activarPantallaCompleta() {
+    // Ocultar barra de estado y navegación
+    getWindow().getDecorView().setSystemUiVisibility(
+        View.SYSTEM_UI_FLAG_FULLSCREEN |
+        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+    );
+    
+    // Ocultar ActionBar
+    if (getSupportActionBar() != null) {
+        getSupportActionBar().hide();
+    }
+}
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    activarPantallaCompleta();
+    setContentView(R.layout.activity_main);
+    // ...
+}
+```
+
+### Bloquear orientación
+
+**AndroidManifest.xml:**
+
+```xml
+<activity
+    android:name=".VideoActivity"
+    android:screenOrientation="landscape"
+    android:configChanges="orientation|screenSize"/>
+```
+
+### Mantener posición al rotar
+
+```java
+private int posicionActual = 0;
+
+@Override
+protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    posicionActual = videoView.getCurrentPosition();
+    outState.putInt("posicion", posicionActual);
+}
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    
+    // ... configurar videoView ...
+    
+    if (savedInstanceState != null) {
+        posicionActual = savedInstanceState.getInt("posicion", 0);
+        videoView.seekTo(posicionActual);
+    }
+}
+```
+
+---
+
+## 📖 7. VideoView vs MediaPlayer para video
+
+### Cuándo usar VideoView
+
+✅ Reproducción simple de videos ✅ Prototipo rápido ✅ Controles básicos suficientes ✅ Aplicación sin requisitos avanzados
+
+### Cuándo usar MediaPlayer + SurfaceView
+
+✅ Control total sobre reproducción ✅ Efectos personalizados ✅ Streaming avanzado ✅ Aplicaciones profesionales ✅ Subtítulos personalizados
+
+### Ejemplo con MediaPlayer (avanzado)
+
+```java
+// Solo como referencia - NO necesario para este curso
+public class VideoPlayerActivity extends AppCompatActivity implements SurfaceHolder.Callback {
+    
+    private MediaPlayer mediaPlayer;
+    private SurfaceView surfaceView;
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_video_player);
+        
+        surfaceView = findViewById(R.id.surfaceView);
+        surfaceView.getHolder().addCallback(this);
+    }
+    
+    @Override
+    public void surfaceCreated(SurfaceHolder holder) {
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setDisplay(holder);
+        
+        try {
+            String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.video;
+            mediaPlayer.setDataSource(this, Uri.parse(videoPath));
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {}
+    
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
+}
+```
+
+---
+
+## 🎯 EJERCICIO 29: Reproductor de Video
+
+Crea un **Reproductor de Video Completo**:
+
+**Requisitos:**
+
+1. **Interfaz**:
+    
+    - VideoView ocupando la pantalla
+    - Controles en parte inferior (semitransparente)
+    - SeekBar con tiempo actual/total
+    - Botones: Play/Pause, Stop, Adelantar +10s, Retroceder -10s
+    - Botón: Pantalla completa
+2. **Funcionalidad**:
+    
+    - Reproducir video desde `res/raw/`
+    - Controles personalizados (sin MediaController)
+    - SeekBar interactivo
+    - Mantener posición al rotar pantalla
+    - Ocultar controles automáticamente tras 3 segundos
+    - Mostrar controles al tocar pantalla
+3. **Extras**:
+    
+    - Modo landscape automático al abrir
+    - Brightness y volume control con gestos
+    - Subtítulos (archivo .srt)
+    - Lista de calidad (240p, 360p, 720p)
+
+**Pistas:**
+
+- Usa `Handler.postDelayed()` para ocultar controles
+- Implementa `OnTouchListener` en VideoView para mostrar controles
+- Para pantalla completa, modifica flags del Window
+
+---
+
+## 🎯 EJERCICIO 30: Galería de Videos
+
+Crea una app de **Galería de Videos** con miniaturas:
+
+**Requisitos:**
+
+1. **MainActivity**:
+    
+    - GridView con videos del dispositivo
+    - Mostrar miniatura (thumbnail) de cada video
+    - Nombre y duración del video
+2. **VideoActivity**:
+    
+    - Reproducir video seleccionado
+    - Controles completos
+    - Botones: Compartir, Eliminar, Info
+3. **Funcionalidad**:
+    
+    - Escanear carpeta Movies del almacenamiento externo
+    - Generar miniaturas con `ThumbnailUtils`
+    - Obtener duración con `MediaMetadataRetriever`
+    - Filtrar solo archivos .mp4
+4. **Extras**:
+    
+    - Grabar video con cámara
+    - Renombrar video
+    - Mover a carpeta
+    - Crear playlist
+
+**Clase sugerida:**
+
+```java
+public class Video {
+    private String nombre;
+    private String ruta;
+    private long duracion;
+    private Bitmap miniatura;
+    
+    public Video(String nombre, String ruta) {
+        this.nombre = nombre;
+        this.ruta = ruta;
+        this.duracion = obtenerDuracion();
+        this.miniatura = generarMiniatura();
+    }
+    
+    private long obtenerDuracion() {
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        try {
+            retriever.setDataSource(ruta);
+            String duracionStr = retriever.extractMetadata(
+                MediaMetadataRetriever.METADATA_KEY_DURATION);
+            return Long.parseLong(duracionStr);
+        } catch (Exception e) {
+            return 0;
+        } finally {
+            retriever.release();
+        }
+    }
+    
+    private Bitmap generarMiniatura() {
+        return ThumbnailUtils.createVideoThumbnail(
+            ruta, 
+            MediaStore.Video.Thumbnails.MINI_KIND);
+    }
+    
+    // Getters
+}
+```
+
+**Pistas:**
+
+- Necesitas permiso `READ_EXTERNAL_STORAGE`
+- Usa `Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES)`
+- Para compartir: `Intent.ACTION_SEND` con tipo `video/*`
+
+---
+
+## 📝 CHECKLIST DÍA 18
+
+- [ ] Entiendes qué es VideoView y cuándo usarlo
+- [ ] Sabes reproducir video desde recursos raw
+- [ ] Puedes reproducir video desde almacenamiento y URLs
+- [ ] Conoces MediaController y cómo usarlo
+- [ ] Sabes crear controles personalizados
+- [ ] Puedes gestionar orientación y pantalla completa
+- [ ] Entiendes la diferencia entre VideoView y MediaPlayer
+- [ ] Has completado Ejercicio 29
+- [ ] Has completado Ejercicio 30
+
+---
+
+## 🎓 CONCEPTOS CLAVE DEL DÍA 18
+
+|Concepto|Definición|
+|---|---|
+|**VideoView**|Widget para reproducir videos|
+|**MediaController**|Controles de reproducción integrados|
+|**setVideoURI()**|Establecer fuente del video|
+|**start()**|Iniciar reproducción|
+|**pause()**|Pausar reproducción|
+|**stopPlayback()**|Detener y liberar recursos|
+|**seekTo()**|Ir a posición específica|
+|**getDuration()**|Obtener duración total|
+|**getCurrentPosition()**|Obtener posición actual|
+|**isPlaying()**|Verificar si está reproduciendo|
+|**setOnPreparedListener()**|Evento cuando video está listo|
+|**setOnCompletionListener()**|Evento cuando termina|
+|**MediaMetadataRetriever**|Obtener metadatos del video|
+|**ThumbnailUtils**|Generar miniaturas|
+
+---
+
+## 🔍 ERRORES COMUNES
+
+```java
+// ❌ ERROR 1: No usar URI correcto para recursos
+videoView.setVideoPath(R.raw.video);  // ❌ No funciona
+
+// ✅ CORRECTO:
+String path = "android.resource://" + getPackageName() + "/" + R.raw.video;
+videoView.setVideoURI(Uri.parse(path));
+
+// ❌ ERROR 2: Llamar start() inmediatamente
+videoView.setVideoURI(uri);
+videoView.start();  // ❌ Puede no estar listo
+
+// ✅ CORRECTO:
+videoView.setVideoURI(uri);
+videoView.setOnPreparedListener(mp -> videoView.start());
+
+// ❌ ERROR 3: No guardar posición al rotar
+// El video se reinicia desde el inicio
+
+// ✅ CORRECTO:
+@Override
+protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    outState.putInt("posicion", videoView.getCurrentPosition());
+}
+
+// ❌ ERROR 4: No detener Handler en onDestroy
+handler.postDelayed(runnable, 100);  // Continúa ejecutándose
+
+// ✅ CORRECTO:
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    handler.removeCallbacksAndMessages(null);
+}
+
+// ❌ ERROR 5: VideoView sin altura/anchura definida
+<VideoView
+    android:layout_width="wrap_content"  // ❌
+    android:layout_height="wrap_content"/>
+
+// ✅ CORRECTO:
+<VideoView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+```
+
+---
+
+## 💡 CONSEJOS PROFESIONALES
+
+1. **Usa prepareAsync implícito**:
+    
+    ```java
+    videoView.setVideoURI(uri);
+    videoView.setOnPreparedListener(mp -> videoView.start());
+    // VideoView usa prepareAsync internamente
+    ```
+    
+2. **Para videos de internet, muestra ProgressBar**:
+    
+    ```java
+    progressBar.setVisibility(View.VISIBLE);
+    videoView.setOnPreparedListener(mp -> {
+        progressBar.setVisibility(View.GONE);
+        videoView.start();
+    });
+    ```
+    
+3. **Mantén pantalla encendida durante reproducción**:
+    
+    ```java
+    videoView.setKeepScreenOn(true);
+    ```
+    
+4. **Libera recursos al pausar app**:
+    
+    ```java
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (videoView.isPlaying()) {
+            videoView.pause();
+        }
+    }
+    ```
+    
+5. **Para mejor rendimiento**, usa resoluciones apropiadas (no 4K en móviles antiguos)
+    
+6. **Gestiona errores de red**:
+    
+    ```java
+    videoView.setOnErrorListener((mp, what, extra) -> {
+        if (what == MediaPlayer.MEDIA_ERROR_IO) {
+            Toast.makeText(this, "Error de red", Toast.LENGTH_SHORT).show();
+        }
+        return true;
+    });
+    ```
+    
+7. **Para subtítulos**, usa MediaPlayer con SurfaceView (VideoView no soporta nativamente)
+    
+
+---
+
+[🔝 Volver al índice](#-%C3%ADndice-general)
+
+---
+
+📌 **Guardado:** 20/03/2026 - 17:30h  
+📌 **Próxima sesión:** Día 19 - SplashScreen
